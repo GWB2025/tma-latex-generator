@@ -229,8 +229,8 @@ def load_config():
         "course": "M840-AAT",
         "tma_ref": "04",
         "cod": "??",
-        "name": "Gordon Brindle",
-        "pin": "M0829758",
+        "name": "John Smith",
+        "pin": "M1234567",
         "style": "tma",
         "output": "./output",
         "basename": "TMA"
@@ -289,7 +289,7 @@ def create_main_tex_file(folder, basename, number_of_questions, course, tma_ref,
     except Exception as e:
         raise Exception(f"Error creating main LaTeX file: {e}")
 
-def create_main_tex_content(style='tma', name='Gordon Brindle', pin='M0829758', course='M836',
+def create_main_tex_content(style='tma', name='John Smith', pin='M1234567', course='M836',
                            tma_ref='02', cod='11 January 2023', number_of_questions=4):
     """Generate the content for the main LaTeX document."""
     lines = '%%!TEX TS-program = pythontex\n'
@@ -511,7 +511,7 @@ class TMAGeneratorGUI:
         self.pin_var = tk.StringVar(value=self.config["pin"])
         pin_entry = ttk.Entry(main_frame, textvariable=self.pin_var, width=15)
         pin_entry.grid(row=row, column=1, sticky=tk.W, pady=2, padx=(5, 0))
-        ToolTip(pin_entry, "Your OU Personal Identification Number (e.g., M0829758)")
+        ToolTip(pin_entry, "Your OU Personal Identification Number (e.g., M1234567)")
         row += 1
         
         # Style

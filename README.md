@@ -30,7 +30,7 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/tma-latex-generator.git
+   git clone https://github.com/GWB2025/tma-latex-generator.git
    cd tma-latex-generator
    ```
 
@@ -129,7 +129,7 @@ tma_generator_gui.py
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/tma-latex-generator.git
+git clone https://github.com/GWB2025/tma-latex-generator.git
 cd tma-latex-generator
 
 # Install development dependencies
@@ -154,8 +154,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/tma-latex-generator/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/tma-latex-generator/discussions)
+- **Issues**: [GitHub Issues](https://github.com/GWB2025/tma-latex-generator/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/GWB2025/tma-latex-generator/discussions)
 - **Documentation**: Built-in help system (Help button in application)
 
 ## 🎓 Educational Use
