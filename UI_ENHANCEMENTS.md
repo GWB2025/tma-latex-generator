@@ -14,12 +14,12 @@ Added comprehensive tooltips and help system to improve user experience and prov
 ### 2. Comprehensive Tooltips Added
 
 #### Basic Settings Fields:
-- **Course Code**: "Your OU module code (e.g., M840-AAT, M336, MS327)"
+- **Course Code**: "Your module code (e.g., MATH101, PHYS201, CHEM301)"
 - **TMA Reference**: "TMA assignment number (e.g., 01, 02, 03, 04)"
 - **Cut-off Date**: "Assignment submission deadline (e.g., '15 January 2024', 'TBD')"
-- **Your Name**: "Your full name as registered with the Open University"
-- **Student PIN**: "Your OU Personal Identification Number (e.g., M0829758)"
-- **LaTeX Style**: "LaTeX style file to use (usually 'tma' for OU assignments)"
+- **Your Name**: "Your full name as registered with your institution"
+- **Student PIN**: "Your student identification number (e.g., S1234567)"
+- **LaTeX Style**: "LaTeX style file to use (usually 'tma' for academic assignments)"
 - **Output Directory**: "Directory where LaTeX files will be created. Use Browse button or type path directly."
 - **Base Filename**: "Name for main LaTeX file (usually 'TMA'). Creates TMA.tex as main file."
 
@@ -52,7 +52,7 @@ Added comprehensive tooltips and help system to improve user experience and prov
 2. **Step-by-Step Guide** - Complete walkthrough
 3. **Field Explanations** - Detailed field descriptions
 4. **Complete Examples** - Real-world usage examples
-5. **Common TMA Patterns** - Typical OU assignment structures
+5. **Common TMA Patterns** - Typical academic assignment structures
 6. **Generated Files** - What gets created
 7. **Controls** - Button explanations and tips
 8. **Troubleshooting** - Common issues and solutions
@@ -61,7 +61,7 @@ Added comprehensive tooltips and help system to improve user experience and prov
 - **Simple Question**: Basic 4-part question without subparts
 - **Complex Question**: Mixed parts with different subpart structures
 - **Mixed Numbering**: Roman numerals and numbers in different parts
-- **Typical OU TMA**: 4 questions × 25 marks structure
+- **Typical Academic TMA**: 4 questions × 25 marks structure
 
 ### 4. Enhanced User Experience
 

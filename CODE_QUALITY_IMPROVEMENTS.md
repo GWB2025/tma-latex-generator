@@ -37,12 +37,12 @@ Completely refactored the TMA LaTeX Generator to achieve professional code quali
 """
 TMA LaTeX Generator GUI Application.
 
-This application creates structured LaTeX files for Open University TMA 
+This application creates structured LaTeX files for academic TMA 
 assignments. Users manually specify question structure through a graphical
 interface, and the application generates all necessary LaTeX files organized
 for easy editing.
 
-Author: Generated for OU TMA workflow
+Author: Generated for academic TMA workflow
 Version: 2.0
 License: MIT
 """
@@ -125,7 +125,7 @@ Replaced repetitive code with loops and data structures:
 ```python
 # Field definitions: (label, config_key, width, tooltip)
 settings_fields = [
-    ("Course Code:", "course", 15, "Your OU module code..."),
+    ("Course Code:", "course", 15, "Your module code..."),
     ("TMA Reference:", "tma_ref", 10, "TMA assignment number..."),
     # ... etc
 ]

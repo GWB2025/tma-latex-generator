@@ -1,6 +1,6 @@
 # TMA LaTeX Generator
 
-> **Professional LaTeX file structure generator for Open University TMA (Tutor-Marked Assignment) submissions**
+> **Professional LaTeX file structure generator for academic TMA (Tutor-Marked Assignment) submissions**
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
 [![Code style: PEP 8](https://img.shields.io/badge/code%20style-PEP%208-blue)](https://peps.python.org/pep-0008/)
@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-The TMA LaTeX Generator is a professional GUI application that creates structured LaTeX file hierarchies for Open University assignments. Instead of manually creating multiple interconnected LaTeX files, this tool generates the complete structure based on your question configuration.
+The TMA LaTeX Generator is a professional GUI application that creates structured LaTeX file hierarchies for academic assignments. Instead of manually creating multiple interconnected LaTeX files, this tool generates the complete structure based on your question configuration.
 
 ### ✨ Key Features
 
@@ -24,7 +24,7 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
 
 - Python 3.8 or higher
 - tkinter (usually included with Python)
-- Open University LaTeX style files (`tma.sty`)
+- Academic LaTeX style files (`tma.sty`)
 
 ### Installation
 
@@ -50,11 +50,11 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
 ### Basic Configuration
 
 1. **Course Information:**
-   - **Course Code**: Your OU module (e.g., M840-AAT, M336)
+   - **Course Code**: Your module (e.g., MATH101, PHYS201)
    - **TMA Reference**: Assignment number (01, 02, 03, 04)
    - **Cut-off Date**: Submission deadline
-   - **Your Name**: Full name as registered with OU
-   - **Student PIN**: Your OU identification number
+   - **Your Name**: Full name as registered with your institution
+   - **Student PIN**: Your student identification number
 
 2. **Question Structure:**
    - **Marks**: Total marks per question (e.g., 25, 30)
@@ -63,7 +63,7 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
 
 ### Example Structure
 
-For a typical OU TMA with complex subparts:
+For a typical academic TMA with complex subparts:
 
 ```
 Question 1: Marks=30, Parts=a,b,c, Subparts=a:i,ii,iii;c:i,ii
@@ -95,7 +95,7 @@ The application creates:
 - **Modular Architecture**: Clean separation of concerns
 
 ### LaTeX Integration
-- **OU Style Compatible**: Works with official OU LaTeX styles
+- **Academic Style Compatible**: Works with standard academic LaTeX styles
 - **Flexible Structure**: Supports various question/part configurations
 - **Professional Output**: Generates publication-ready LaTeX structure
 
@@ -148,7 +148,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Open University**: For providing the educational context and LaTeX style requirements
+- **Academic Community**: For providing the educational context and LaTeX style requirements
 - **Python Community**: For the excellent tkinter framework and development tools
 - **Contributors**: Thanks to all who have contributed to making this tool better
 
@@ -160,13 +160,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🎓 Educational Use
 
-This tool is specifically designed for Open University students working on Tutor-Marked Assignments (TMAs). It streamlines the LaTeX document preparation process, allowing students to focus on content rather than file structure management.
+This tool is specifically designed for students working on Tutor-Marked Assignments (TMAs). It streamlines the LaTeX document preparation process, allowing students to focus on content rather than file structure management.
 
 **Note**: This tool generates the LaTeX structure only. You'll need:
 - A LaTeX editor (TeXstudio, TeXworks, Overleaf, etc.)
-- OU LaTeX style files (`tma.sty`)
+- Academic LaTeX style files (`tma.sty`)
 - Basic LaTeX knowledge for content creation
 
 ---
 
-**Made with ❤️ for OU students by the community**
+**Made with ❤️ for students by the community**

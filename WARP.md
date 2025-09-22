@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Project Overview
 
-This is a Python utility for generating LaTeX files for Open University Tutor-Marked Assignments (TMAs). The tool provides both automatic PDF extraction and manual input methods for creating structured TeX files with proper organization and templating for academic assignments.
+This is a Python utility for generating LaTeX files for academic Tutor-Marked Assignments (TMAs). The tool provides both automatic PDF extraction and manual input methods for creating structured TeX files with proper organization and templating for academic assignments.
 
 ### Key Features
 - **Manual Question Structure Input**: Robust GUI interface for manually specifying question structure

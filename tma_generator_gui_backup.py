@@ -226,11 +226,11 @@ CONFIG_FILE = "tma_generator_config.json"
 def load_config():
     """Load configuration from file."""
     default_config = {
-        "course": "M840-AAT",
+        "course": "MATH101",
         "tma_ref": "04",
         "cod": "??",
         "name": "John Smith",
-        "pin": "M1234567",
+        "pin": "S1234567",
         "style": "tma",
         "output": "./output",
         "basename": "TMA"
@@ -479,7 +479,7 @@ class TMAGeneratorGUI:
         self.course_var = tk.StringVar(value=self.config["course"])
         course_entry = ttk.Entry(main_frame, textvariable=self.course_var, width=15)
         course_entry.grid(row=row, column=1, sticky=tk.W, pady=2, padx=(5, 0))
-        ToolTip(course_entry, "Your OU module code (e.g., M840-AAT, M336, MS327)")
+        ToolTip(course_entry, "Your module code (e.g., MATH101, PHYS201)")
         row += 1
         
         # TMA Reference
@@ -503,7 +503,7 @@ class TMAGeneratorGUI:
         self.name_var = tk.StringVar(value=self.config["name"])
         name_entry = ttk.Entry(main_frame, textvariable=self.name_var, width=30)
         name_entry.grid(row=row, column=1, sticky=tk.W, pady=2, padx=(5, 0))
-        ToolTip(name_entry, "Your full name as registered with the Open University")
+        ToolTip(name_entry, "Your full name as registered with your institution")
         row += 1
         
         # PIN
@@ -519,7 +519,7 @@ class TMAGeneratorGUI:
         self.style_var = tk.StringVar(value=self.config["style"])
         style_entry = ttk.Entry(main_frame, textvariable=self.style_var, width=10)
         style_entry.grid(row=row, column=1, sticky=tk.W, pady=2, padx=(5, 0))
-        ToolTip(style_entry, "LaTeX style file to use (usually 'tma' for OU assignments)")
+        ToolTip(style_entry, "LaTeX style file to use (usually 'tma' for academic assignments)")
         row += 1
         
         # Output Directory

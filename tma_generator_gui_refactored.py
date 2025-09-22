@@ -2,12 +2,12 @@
 """
 TMA LaTeX Generator GUI Application.
 
-This application creates structured LaTeX files for Open University TMA 
+This application creates structured LaTeX files for academic TMA 
 assignments. Users manually specify question structure through a graphical
 interface, and the application generates all necessary LaTeX files organized
 for easy editing.
 
-Author: Generated for OU TMA workflow
+Author: Generated for academic TMA workflow
 Version: 2.0
 License: MIT
 """
@@ -40,11 +40,11 @@ TOOLTIP_STYLE = {
 
 # Default configuration values
 DEFAULT_CONFIG = {
-    "course": "M840-AAT",
+    "course": "MATH101",
     "tma_ref": "04", 
     "cod": "??",
     "name": "John Smith",
-    "pin": "M1234567",
+    "pin": "S1234567",
     "style": "tma",
     "output": "./output",
     "basename": "TMA"
@@ -238,11 +238,11 @@ The TMA LaTeX Generator creates structured LaTeX files for academic assignments.
 📋 STEP-BY-STEP GUIDE
 
 1. BASIC SETTINGS
-   • Course Code: Your module code (e.g., M840-AAT, M336, etc.)
+   • Course Code: Your module code (e.g., MATH101, PHYS201, etc.)
    • TMA Reference: Assignment number (e.g., 01, 02, 03, 04)
    • Cut-off Date: Submission deadline (e.g., "15 January 2024")
    • Your Name: Your full name as registered
-   • Student PIN: Your OU personal identification number
+   • Student PIN: Your student identification number
    • LaTeX Style: Style file to use (usually "tma")
    • Output Directory: Where to save generated files
    • Base Filename: Main file name (usually "TMA")
@@ -303,7 +303,7 @@ The TMA LaTeX Generator creates structured LaTeX files for academic assignments.
 
 4. COMMON TMA PATTERNS
 
-   🏫 TYPICAL OU TMA STRUCTURE:
+   🏫 TYPICAL ACADEMIC TMA STRUCTURE:
    • 4 questions, 25 marks each
    • Each question has 4 parts (a,b,c,d)
    • Some parts may have subparts
@@ -763,12 +763,12 @@ class TMAGeneratorGUI:
         """
         # Setting field definitions with labels, config keys, widths and tooltips
         settings_fields = [
-            ("Course Code:", "course", 15, "Your OU module code (e.g., M840-AAT, M336, MS327)"),
+            ("Course Code:", "course", 15, "Your module code (e.g., MATH101, PHYS201, CHEM301)"),
             ("TMA Reference:", "tma_ref", 10, "TMA assignment number (e.g., 01, 02, 03, 04)"),
             ("Cut-off Date:", "cod", 15, "Assignment submission deadline (e.g., '15 January 2024', 'TBD')"),
-            ("Your Name:", "name", 30, "Your full name as registered with the Open University"),
-            ("Student PIN:", "pin", 15, "Your OU Personal Identification Number (e.g., M0829758)"),
-            ("LaTeX Style:", "style", 10, "LaTeX style file to use (usually 'tma' for OU assignments)"),
+            ("Your Name:", "name", 30, "Your full name as registered with your institution"),
+            ("Student PIN:", "pin", 15, "Your student identification number (e.g., S1234567)"),
+            ("LaTeX Style:", "style", 10, "LaTeX style file to use (usually 'tma' for academic assignments)"),
         ]
         
         # Create standard input fields
