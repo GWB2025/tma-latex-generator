@@ -42,8 +42,8 @@ TOOLTIP_STYLE = {
 DEFAULT_CONFIG = {
     "course": "MATH101",
     "tma_ref": "04", 
-    "cod": "??",
-    "name": "John Smith",
+    "cod": "21 January 2026",
+    "name": "Alex Taylor",
     "pin": "S1234567",
     "style": "tma",
     "output": "./output",
@@ -240,7 +240,7 @@ The TMA LaTeX Generator creates structured LaTeX files for academic assignments.
 1. BASIC SETTINGS
    • Course Code: Your module code (e.g., MATH101, PHYS201, etc.)
    • TMA Reference: Assignment number (e.g., 01, 02, 03, 04)
-   • Cut-off Date: Submission deadline (e.g., "15 January 2024")
+   • Cut-off Date: Submission deadline (e.g., "21 January 2026")
    • Your Name: Your full name as registered
    • Student PIN: Your student identification number
    • LaTeX Style: Style file to use (usually "tma")
@@ -767,7 +767,7 @@ class TMAGeneratorGUI:
         settings_fields = [
             ("Course Code:", "course", 15, "Your module code (e.g., MATH101, PHYS201, CHEM301)"),
             ("TMA Reference:", "tma_ref", 10, "TMA assignment number (e.g., 01, 02, 03, 04)"),
-            ("Cut-off Date:", "cod", 15, "Assignment submission deadline (e.g., '15 January 2024', 'TBD')"),
+            ("Cut-off Date:", "cod", 15, "Assignment submission deadline (e.g., '21 January 2026', 'TBD')"),
             ("Your Name:", "name", 30, "Your full name as registered with your institution"),
             ("Student PIN:", "pin", 15, "Your student identification number (e.g., S1234567)"),
             ("LaTeX Style:", "style", 10, "LaTeX style file to use (usually 'tma' for academic assignments)"),

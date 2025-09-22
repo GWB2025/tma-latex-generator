@@ -16,7 +16,7 @@ Added comprehensive tooltips and help system to improve user experience and prov
 #### Basic Settings Fields:
 - **Course Code**: "Your module code (e.g., MATH101, PHYS201, CHEM301)"
 - **TMA Reference**: "TMA assignment number (e.g., 01, 02, 03, 04)"
-- **Cut-off Date**: "Assignment submission deadline (e.g., '15 January 2024', 'TBD')"
+- **Cut-off Date**: "Assignment submission deadline (e.g., '21 January 2026', 'TBD')"
 - **Your Name**: "Your full name as registered with your institution"
 - **Student PIN**: "Your student identification number (e.g., S1234567)"
 - **LaTeX Style**: "LaTeX style file to use (usually 'tma' for academic assignments)"
