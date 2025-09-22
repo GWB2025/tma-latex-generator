@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Project Overview
 
-This is a Python utility for generating LaTeX files for academic Tutor-Marked Assignments (TMAs). The tool provides both automatic PDF extraction and manual input methods for creating structured TeX files with proper organisation and templating for academic assignments.
+This is a Python utility for generating LaTeX files for academic Tutor-Marked Assignments (TMAs), specifically designed for Overleaf workflow. The tool provides manual input methods for creating structured TeX files with proper organisation and templating, ready for upload to Overleaf.
 
 ### Key Features
 - **Manual Question Structure Input**: Robust GUI interface for manually specifying question structure
@@ -39,6 +39,7 @@ This is a Python utility for generating LaTeX files for academic Tutor-Marked As
    - Generates individual question files
    - Creates part and subpart files as needed
    - Handles proper TeX root directives
+   - Automatically copies .sty files for Overleaf compatibility
 
 ## Common Commands
 
@@ -74,18 +75,28 @@ python tma_generator_gui.py
 - **Subparts**: `a:i,ii;b:1,2,3` (part a has subparts i,ii; part b has subparts 1,2,3)
 - **Marks**: Any integer (default: 25)
 
-## File Structure Generated
+## File Structure Generated (Overleaf-Ready)
 
 ```
 output_directory/
-├── TMA.tex                 # Main document
+├── TMA.tex                 # Main document (Overleaf main file)
 ├── q1.tex                  # Question 1 structure
 ├── q1a.tex                 # Question 1, part (a)
 ├── q1b.tex                 # Question 1, part (b)
 ├── q1a_0.tex              # Question 1a, subpart 0 (if subparts exist)
 ├── q1a_1.tex              # Question 1a, subpart 1
+├── tma.sty                 # LaTeX style file (automatically copied)
+├── tma-extras.sty          # Extended LaTeX styles (automatically copied)
 └── ...                     # Additional questions and parts
 ```
+
+## Overleaf Workflow
+
+1. **Generate files** using this tool
+2. **Create blank Overleaf project**
+3. **Delete default main.tex** in Overleaf
+4. **Upload entire output directory** contents to Overleaf
+5. **Compile and edit** your TMA directly in Overleaf
 
 ## Configuration
 

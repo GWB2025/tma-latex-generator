@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-The TMA LaTeX Generator is a professional GUI application that creates structured LaTeX file hierarchies for academic assignments. Instead of manually creating multiple interconnected LaTeX files, this tool generates the complete structure based on your question configuration.
+The TMA LaTeX Generator is a professional GUI application that creates structured LaTeX file hierarchies for academic assignments, specifically designed for use with **Overleaf**. Instead of manually creating multiple interconnected LaTeX files, this tool generates the complete structure based on your question configuration, ready to upload to Overleaf.
 
 ### ✨ Key Features
 
@@ -24,7 +24,8 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
 
 - Python 3.8 or higher
 - tkinter (usually included with Python)
-- Academic LaTeX style files (`tma.sty`)
+- Overleaf account (free or paid)
+- Academic LaTeX style files (included: `tma.sty`, `tma-extras.sty`)
 
 ### Installation
 
@@ -44,6 +45,12 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
    - Set up question structure (marks, parts, subparts)
    - Choose output directory
    - Click "Generate TMA Files"
+
+4. **Upload to Overleaf:**
+   - Create a new blank project in Overleaf
+   - Delete the default files (main.tex, etc.)
+   - Upload all files from your output directory
+   - Compile and start writing!
 
 ## 📖 Usage
 
@@ -74,11 +81,50 @@ Question 4: Marks=20, Parts=a,b, Subparts=a:i,ii;b:i,ii,iii
 
 ### Generated Files
 
-The application creates:
+The application creates a complete file structure ready for Overleaf:
 - **TMA.tex**: Main LaTeX document
 - **q1.tex, q2.tex, ...**: Individual question files
 - **q1a.tex, q1b.tex, ...**: Question part files
 - **q1a_0.tex, q1a_1.tex, ...**: Subpart files (when applicable)
+- **tma.sty, tma-extras.sty**: LaTeX style files (automatically copied)
+
+## 🌍 Using with Overleaf
+
+This tool is specifically designed for Overleaf workflow:
+
+### Step 1: Generate Files
+1. Run the TMA LaTeX Generator
+2. Configure your assignment details
+3. Set up question structure
+4. Click "Generate TMA Files"
+5. Note the output directory location
+
+### Step 2: Create Overleaf Project
+1. Go to [overleaf.com](https://overleaf.com) and sign in
+2. Click **"New Project"** → **"Blank Project"**
+3. Give your project a name (e.g., "MATH101 TMA 04")
+
+### Step 3: Replace Default Files
+1. **Delete** the default `main.tex` file in Overleaf
+2. **Upload** all files from your output directory:
+   - Use the upload button or drag & drop
+   - Upload all `.tex` and `.sty` files together
+   - Overleaf will automatically detect the file structure
+
+### Step 4: Compile and Edit
+1. **Set main document**: Ensure `TMA.tex` is set as the main document
+2. **Compile**: Click the green "Recompile" button
+3. **Start writing**: Edit the individual question part files (`q1a.tex`, `q1b.tex`, etc.)
+4. **Preview**: View your formatted TMA in the PDF preview
+
+### Overleaf Benefits
+- ✅ **No local LaTeX installation** required
+- ✅ **Automatic compilation** with error highlighting
+- ✅ **Real-time preview** of your formatted document
+- ✅ **Cloud storage** – never lose your work
+- ✅ **Collaboration** features for group assignments
+- ✅ **Version history** and backup
+- ✅ **Professional formatting** with included style files
 
 ## 🛠️ Features
 

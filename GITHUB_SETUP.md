@@ -8,7 +8,7 @@
 2. Click **"+"** → **"New repository"**
 3. Repository settings:
    - **Name**: `tma-latex-generator` (or your choice)
-   - **Description**: `Professional TMA LaTeX Generator for academic assignments`
+   - **Description**: `Professional TMA LaTeX Generator for Overleaf - generates structured academic assignment files`
    - **Public** or **Private** (your choice)
    - **Don't initialize** with README/gitignore (we have them)
 
@@ -91,7 +91,7 @@ gh repo create tma-latex-generator --public --source=. --remote=origin --push
 1. **Add a README badge**: GitHub will suggest adding repository badges
 2. **Enable Issues**: For bug reports and feature requests
 3. **Set up GitHub Pages**: For project documentation hosting
-4. **Add topics**: Tag with `latex`, `academic`, `python`, `gui`
+4. **Add topics**: Tag with `latex`, `overleaf`, `academic`, `python`, `gui`, `tma`
 
 ## 💡 Pro Tips
 
