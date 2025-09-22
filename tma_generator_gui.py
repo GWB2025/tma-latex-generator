@@ -1204,6 +1204,16 @@ class TMAGeneratorGUI:
         Args:
             question_frame: Frame to remove
         """
+        # Get question number for confirmation message
+        question_text = question_frame.cget('text')
+        
+        # Confirm removal
+        if not messagebox.askyesno(
+            "Remove Question",
+            f"Remove {question_text}? This cannot be undone."
+        ):
+            return
+        
         # Remove from widgets list
         self.question_widgets = [
             q for q in self.question_widgets
@@ -1305,6 +1315,109 @@ class TMAGeneratorGUI:
         
         return subparts_dict
     
+    def _validate_question_structure(self) -> Optional[str]:
+        """
+        Validate the question structure for common errors.
+        
+        Returns:
+            Error message if validation fails, None if validation passes
+        """
+        total_marks = 0
+        
+        for i, question_data in enumerate(self.question_widgets):
+            question_num = i + 1
+            
+            # Get and validate marks
+            marks_text = question_data['marks_var'].get().strip()
+            try:
+                marks = int(marks_text) if marks_text else 25
+                if marks <= 0:
+                    return f"Question {question_num}: Marks must be a positive number (got '{marks_text}')."
+                total_marks += marks
+            except ValueError:
+                return f"Question {question_num}: Marks must be a valid number (got '{marks_text}')."
+            
+            # Get parts list
+            parts_text = question_data['parts_var'].get().strip()
+            parts = [p.strip().lower() for p in parts_text.split(',') if p.strip()]
+            
+            if not parts:
+                return f"Question {question_num}: No parts specified. Please add at least one part (e.g., 'a,b,c,d')."
+            
+            # Check for duplicate parts
+            if len(parts) != len(set(parts)):
+                duplicates = [p for p in set(parts) if parts.count(p) > 1]
+                return f"Question {question_num}: Duplicate parts found: {', '.join(duplicates)}. Each part should be unique."
+            
+            # Get subparts string
+            subparts_text = question_data['subparts_var'].get().strip()
+            if not subparts_text:
+                continue  # No subparts to validate
+            
+            # Parse and validate subparts
+            subparts_dict = self._parse_subparts_string(subparts_text)
+            
+            # Check if all referenced parts in subparts actually exist
+            for subpart_part in subparts_dict.keys():
+                subpart_part_lower = subpart_part.strip().lower()
+                if subpart_part_lower not in parts:
+                    available_parts = ', '.join(parts)
+                    return (f"Question {question_num}: Subpart references part '{subpart_part}' which doesn't exist.\n"
+                           f"Available parts: {available_parts}\n"
+                           f"Check your subparts format: 'part:sub1,sub2;part2:sub1,sub2'")
+            
+            # Check for empty subparts
+            for part, subpart_dict in subparts_dict.items():
+                if not subpart_dict:
+                    return f"Question {question_num}: Part '{part}' has no subparts specified. Either remove '{part}:' or add subparts like '{part}:' or add subparts like '{part}:i,ii,iii'."
+        
+        # Validate total marks
+        if total_marks != 100:
+            return self._handle_marks_total_mismatch(total_marks)
+        
+        return None  # No validation errors
+    
+    def _handle_marks_total_mismatch(self, total_marks: int) -> Optional[str]:
+        """
+        Handle case where total marks don't add up to 100.
+        
+        Args:
+            total_marks: The actual total of all question marks
+            
+        Returns:
+            Error message if user chooses to fix, None if user chooses to continue
+        """
+        num_questions = len(self.question_widgets)
+        
+        if total_marks < 100:
+            message = (f"Total marks: {total_marks} (should be 100)\n\n"
+                      f"You currently have {num_questions} question(s).\n"
+                      f"The marks are {100 - total_marks} short of 100.\n\n"
+                      f"Possible issues:\n"
+                      f"• Too few questions - consider adding more questions\n"
+                      f"• Question marks are too low - consider increasing marks per question\n\n"
+                      f"Do you want to continue generating files anyway?")
+        else:  # total_marks > 100
+            message = (f"Total marks: {total_marks} (should be 100)\n\n"
+                      f"You currently have {num_questions} question(s).\n"
+                      f"The marks are {total_marks - 100} over 100.\n\n"
+                      f"Possible issues:\n"
+                      f"• Too many questions - consider removing some questions\n"
+                      f"• Question marks are too high - consider reducing marks per question\n\n"
+                      f"Do you want to continue generating files anyway?")
+        
+        # Ask user if they want to continue despite the mismatch
+        continue_anyway = messagebox.askyesno(
+            "Marks Total Warning",
+            message,
+            icon='warning'
+        )
+        
+        if continue_anyway:
+            return None  # User chose to continue, no error
+        else:
+            return f"File generation cancelled. Please adjust your questions so the total marks equal 100 (currently: {total_marks})."
+    
     def _generate_files(self) -> None:
         """Generate LaTeX files based on current configuration."""
         # Clear output display
@@ -1318,6 +1431,13 @@ class TMAGeneratorGUI:
         try:
             # Get configuration and structure
             config = self._get_current_config()
+            
+            # Validate structure before generation
+            validation_error = self._validate_question_structure()
+            if validation_error:
+                messagebox.showerror("Validation Error", validation_error)
+                return
+            
             structure = self._get_manual_structure()
             
             # Generate files
