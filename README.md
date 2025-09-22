@@ -97,12 +97,14 @@ This tool is specifically designed for Overleaf workflow:
 2. Configure your assignment details
 3. Set up question structure
 4. Click "Generate TMA Files"
-5. Note the output directory location
+5. Note the output directory location and suggested project name
 
 ### Step 2: Create Overleaf Project
 1. Go to [overleaf.com](https://overleaf.com) and sign in
 2. Click **"New Project"** → **"Blank Project"**
-3. Give your project a name (e.g., "MATH101 TMA 04")
+3. Use the suggested project name from the generator output
+   - Format: **"COURSE TMA XX (YEAR)"** (e.g., "MATH101 TMA 04 (2026)")
+   - Automatically generated from your course details
 
 ### Step 3: Replace Default Files
 1. **Delete** the default `main.tex` file in Overleaf

@@ -360,7 +360,8 @@ This tool generates files specifically for Overleaf:
 1. CREATE OVERLEAF PROJECT:
    • Go to overleaf.com and sign in
    • Click "New Project" → "Blank Project"
-   • Name your project (e.g., "MATH101 TMA 04")
+   • Use the suggested project name from output
+   • (e.g., "MATH101 TMA 04 (2026)")
 
 2. UPLOAD GENERATED FILES:
    • Delete the default main.tex file in Overleaf
@@ -1400,8 +1401,20 @@ class TMAGeneratorGUI:
                 self.output_text.see(tk.END)
                 self.output_text.update()
             
+            # Generate suggested Overleaf project name
+            suggested_name = self._generate_overleaf_project_name(config)
+            
             success_message = f"TMA files successfully created in {actual_folder}"
             self.output_text.insert(tk.END, f"{success_message}\n")
+            self.output_text.insert(tk.END, "\n=== OVERLEAF SETUP ===\n")
+            self.output_text.insert(tk.END, f"Suggested Overleaf project name:\n")
+            self.output_text.insert(tk.END, f"  {suggested_name}\n\n")
+            self.output_text.insert(tk.END, "Next steps:\n")
+            self.output_text.insert(tk.END, "1. Create new blank project in Overleaf\n")
+            self.output_text.insert(tk.END, "2. Use the suggested name above\n")
+            self.output_text.insert(tk.END, "3. Delete default main.tex in Overleaf\n")
+            self.output_text.insert(tk.END, "4. Upload ALL files from output directory\n")
+            self.output_text.insert(tk.END, "5. Compile and start editing!\n\n")
             self.output_text.insert(tk.END, "Generation completed successfully!\n")
             self.output_text.see(tk.END)
             
@@ -1467,6 +1480,34 @@ class TMAGeneratorGUI:
                     subparts_dict[f"{QUESTION_PREFIX}{q_id[1:]}{part_id}"] = len(subparts)
         
         return parts_list, subparts_dict
+    
+    def _generate_overleaf_project_name(self, config: Dict[str, str]) -> str:
+        """
+        Generate a suggested Overleaf project name based on course details.
+        
+        Args:
+            config: Configuration dictionary with course details
+            
+        Returns:
+            Suggested project name string
+        """
+        course = config.get('course', 'COURSE').upper()
+        tma_ref = config.get('tma_ref', '01').zfill(2)  # Ensure 2 digits
+        cod = config.get('cod', '').strip()
+        
+        # Extract year from cut-off date if possible
+        year_suffix = ""
+        if cod:
+            # Try to extract year from various date formats
+            import re
+            year_match = re.search(r'\b(20\d{2})\b', cod)
+            if year_match:
+                year_suffix = f" ({year_match.group(1)})"
+        
+        # Generate clean, professional project name
+        project_name = f"{course} TMA {tma_ref}{year_suffix}"
+        
+        return project_name
 
 
 def main() -> None:
