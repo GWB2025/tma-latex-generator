@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.Python
+env/
+venv/
+
+# Generated LaTeX output directories (keep main structure examples)
+junk.*/
+TMA.*/
+output.*/
+test_output/
+assignment/
+
+# But keep some example output for reference
+!TMA/
+!output/
+
+# Configuration files with personal data
+tma_generator_config.json
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.pdf
