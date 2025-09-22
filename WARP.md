@@ -16,7 +16,7 @@ This is a Python utility for generating LaTeX files for academic Tutor-Marked As
 
 ### Core Components
 
-- **tma_generator_gui.py**: Main GUI application with both manual input and PDF extraction
+- **tma_generator_gui.py**: Main GUI application with manual input interface
 - **Configuration Management**: JSON-based config storage for user preferences
 - **LaTeX Generation Engine**: Creates structured TeX files with proper includes and formatting
 

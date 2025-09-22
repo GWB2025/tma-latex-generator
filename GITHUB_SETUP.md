@@ -62,11 +62,9 @@ gh repo create tma-latex-generator --public --source=. --remote=origin --push
 ## 📋 What Gets Uploaded
 
 ✅ **Included:**
-- `tma_generator_gui.py` (main refactored application)
-- `tma_generator_gui_backup.py` (original backup)
+- `tma_generator_gui.py` (main application)
 - `*.md` (all documentation)
 - `*.sty` (LaTeX style files)
-- `TMA/`, `output/` (example generated structures)
 - `.gitignore` (project file management)
 
 ❌ **Excluded (by .gitignore):**

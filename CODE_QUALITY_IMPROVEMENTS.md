@@ -280,12 +280,12 @@ label = tk.Label(tooltip, text=self.text, justify='left', **TOOLTIP_STYLE)
 
 ```
 TeXApp/
-├── tma_generator_gui.py           # Main refactored application
-├── tma_generator_gui_backup.py    # Original backup
-├── tma_generator_gui_refactored.py # Refactored version (kept for reference)
+├── tma_generator_gui.py           # Main application (refactored and cleaned)
 ├── CODE_QUALITY_IMPROVEMENTS.md   # This documentation
-├── UI_ENHANCEMENTS.md             # Previous UI improvements
-└── CHANGES.md                     # PDF removal changes
+├── UI_ENHANCEMENTS.md             # UI improvements documentation
+├── CHANGES.md                     # Change history
+├── README.md                      # Project documentation
+└── *.sty                          # LaTeX style files
 ```
 
 ## Metrics
