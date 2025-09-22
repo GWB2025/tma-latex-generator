@@ -17,6 +17,7 @@ import datetime
 import json
 import os
 import re
+import shutil
 import textwrap
 from collections import defaultdict
 from pathlib import Path
@@ -666,6 +667,37 @@ class LaTeXFileGenerator:
             lines.append('\n\\qsubpart')
             lines.append(f'\\input{{{part_id}_{i}}}')
         return ''.join(lines)
+    
+    def copy_style_files(self, output_folder: str) -> List[str]:
+        """
+        Copy all .sty files from the current directory to the output folder.
+        
+        Args:
+            output_folder: Destination directory for style files
+            
+        Returns:
+            List of copied style file names
+            
+        Raises:
+            Exception: If file copying fails
+        """
+        copied_files = []
+        current_dir = Path.cwd()
+        output_path = Path(output_folder)
+        
+        try:
+            # Find all .sty files in current directory
+            sty_files = list(current_dir.glob("*.sty"))
+            
+            for sty_file in sty_files:
+                dest_file = output_path / sty_file.name
+                shutil.copy2(sty_file, dest_file)
+                copied_files.append(sty_file.name)
+                
+        except (IOError, OSError) as error:
+            raise Exception(f"Error copying style files: {error}")
+            
+        return copied_files
 
 
 class TMAGeneratorGUI:
@@ -1346,6 +1378,13 @@ class TMAGeneratorGUI:
                     config["basename"],
                     subparts_dict
                 )
+            
+            # Copy style files to output directory
+            copied_styles = generator.copy_style_files(actual_folder)
+            if copied_styles:
+                self.output_text.insert(tk.END, f"Copied style files: {', '.join(copied_styles)}\n")
+                self.output_text.see(tk.END)
+                self.output_text.update()
             
             success_message = f"TMA files successfully created in {actual_folder}"
             self.output_text.insert(tk.END, f"{success_message}\n")
