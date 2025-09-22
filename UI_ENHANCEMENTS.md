@@ -43,8 +43,8 @@ Added comprehensive tooltips and help system to improve user experience and prov
 #### Features:
 - **Modal dialog** with comprehensive user guide
 - **Scrollable content** for easy reading
-- **Emoji icons** for visual organization
-- **Centered positioning** on screen
+- **Emoji icons** for visual organisation
+- **Centred positioning** on screen
 - **Resizable window** for user preference
 
 #### Content Sections:
@@ -75,7 +75,7 @@ Added comprehensive tooltips and help system to improve user experience and prov
 - Clean, professional tooltip styling
 - Consistent tooltip positioning
 - Non-intrusive design that doesn't interfere with workflow
-- Easy-to-read font and color scheme
+- Easy-to-read font and colour scheme
 
 ## Testing Results
 - ✅ Application launches successfully with all enhancements

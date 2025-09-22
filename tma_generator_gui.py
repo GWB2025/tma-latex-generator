@@ -9,7 +9,7 @@ for easy editing.
 
 Author: Generated for academic TMA workflow
 Version: 2.0
-License: MIT
+Licence: MIT
 """
 
 import argparse
@@ -177,15 +177,15 @@ class HelpDialog:
         self.dialog.grab_set()
     
     def _center_dialog(self) -> None:
-        """Center dialog on screen."""
+        """Centre dialogue on screen."""
         self.dialog.update_idletasks()
         screen_width = self.dialog.winfo_screenwidth()
         screen_height = self.dialog.winfo_screenheight()
-        dialog_width = self.dialog.winfo_width()
-        dialog_height = self.dialog.winfo_height()
+        dialogue_width = self.dialog.winfo_width()
+        dialogue_height = self.dialog.winfo_height()
         
-        x = (screen_width // 2) - (dialog_width // 2)
-        y = (screen_height // 2) - (dialog_height // 2)
+        x = (screen_width // 2) - (dialogue_width // 2)
+        y = (screen_height // 2) - (dialogue_height // 2)
         self.dialog.geometry(f"+{x}+{y}")
     
     def _create_help_content(self) -> None:
@@ -233,7 +233,7 @@ class HelpDialog:
         """
         return """🎯 OVERVIEW
 
-The TMA LaTeX Generator creates structured LaTeX files for academic assignments. You manually specify the question structure, and the application generates all necessary files organized for easy editing.
+The TMA LaTeX Generator creates structured LaTeX files for academic assignments. You manually specify the question structure, and the application generates all necessary files organised for easy editing.
 
 📋 STEP-BY-STEP GUIDE
 
@@ -248,7 +248,7 @@ The TMA LaTeX Generator creates structured LaTeX files for academic assignments.
    • Base Filename: Main file name (usually "TMA")
 
 2. QUESTION STRUCTURE
-   This is where you specify how your TMA is organized:
+   This is where you specify how your TMA is organised:
 
    📝 MARKS FIELD
    Enter the total marks for each question as a number.

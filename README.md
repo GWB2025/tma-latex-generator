@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
 [![Code style: PEP 8](https://img.shields.io/badge/code%20style-PEP%208-blue)](https://peps.python.org/pep-0008/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licences/MIT)
 
 ## 🎯 Overview
 
@@ -142,9 +142,9 @@ python -m pytest  # if tests added
 python -m flake8 tma_generator_gui.py
 ```
 
-## 📄 License
+## 📄 Licence
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT Licence - see the [LICENCE](LICENCE) file for details.
 
 ## 🙏 Acknowledgments
 

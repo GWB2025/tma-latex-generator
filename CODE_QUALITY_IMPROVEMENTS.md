@@ -42,9 +42,9 @@ assignments. Users manually specify question structure through a graphical
 interface, and the application generates all necessary LaTeX files organized
 for easy editing.
 
-Author: Generated for academic TMA workflow
+Author: Generated for OU TMA workflow
 Version: 2.0
-License: MIT
+Licence: MIT
 """
 ```
 
