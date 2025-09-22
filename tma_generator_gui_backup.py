@@ -292,7 +292,7 @@ def create_main_tex_file(folder, basename, number_of_questions, course, tma_ref,
 def create_main_tex_content(style='tma', name='John Smith', pin='M1234567', course='M836',
                            tma_ref='02', cod='11 January 2023', number_of_questions=4):
     """Generate the content for the main LaTeX document."""
-    lines = '%%!TEX TS-program = pythontex\n'
+    lines = ''
     lines += '\\documentclass[a4paper,12pt]{article}\n'
     lines += '\\usepackage{{{}}}\n'.format(style)
     lines += '\\myname{{{}}}\n'.format(name)

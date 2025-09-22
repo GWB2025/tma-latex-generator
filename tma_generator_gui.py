@@ -59,7 +59,7 @@ SEPARATOR_PADY = 10
 # LaTeX file generation constants
 TEX_EXTENSION = ".tex"
 QUESTION_PREFIX = "q"
-MAIN_TEX_PROGRAM = "%%!TEX TS-program = pythontex"
+MAIN_TEX_PROGRAM = ""
 
 
 class ToolTip:
@@ -505,7 +505,9 @@ class LaTeXFileGenerator:
         Returns:
             Complete LaTeX document content as string
         """
-        lines = [MAIN_TEX_PROGRAM]
+        lines = []
+        if MAIN_TEX_PROGRAM:
+            lines.append(MAIN_TEX_PROGRAM)
         lines.append("\\documentclass[a4paper,12pt]{article}")
         lines.append(f"\\usepackage{{{self.config['style']}}}")
         lines.append(f"\\myname{{{self.config['name']}}}")
