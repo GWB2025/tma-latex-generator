@@ -128,6 +128,150 @@ This tool is specifically designed for Overleaf workflow:
 - ✅ **Version history** and backup
 - ✅ **Professional formatting** with included style files
 
+## 🖥️ Using with TeX Live (Local Installation)
+
+For users who prefer working locally with TeX Live instead of Overleaf:
+
+### Prerequisites
+- **TeX Live** installed on your system ([Download TeX Live](https://tug.org/texlive/))
+- **LaTeX Editor** (TeXstudio, TeXworks, VS Code with LaTeX Workshop, etc.)
+- Basic familiarity with command-line LaTeX compilation
+
+### Step 1: Generate Files
+1. Run the TMA LaTeX Generator
+2. Configure your assignment details
+3. Set up question structure  
+4. Choose a local output directory
+5. Click "Generate TMA Files"
+
+### Step 2: Navigate to Output Directory
+```bash
+# Navigate to your chosen output directory
+cd /path/to/your/output/directory
+
+# Verify all files are present
+ls -la
+# Should show: TMA.tex, q1.tex, q2.tex, ..., tma.sty, tma-extras.sty
+```
+
+### Step 3: Compile with TeX Live
+
+#### Option A: Using pdflatex (Recommended)
+```bash
+# Compile the main document
+pdflatex TMA.tex
+
+# If you have citations/references, run:
+pdflatex TMA.tex
+bibtex TMA        # Only if you have references
+pdflatex TMA.tex
+pdflatex TMA.tex
+```
+
+#### Option B: Using latexmk (Automated)
+```bash
+# Automated compilation with dependency handling
+latexmk -pdf TMA.tex
+
+# For continuous compilation (rebuilds on file changes)
+latexmk -pdf -pvc TMA.tex
+```
+
+#### Option C: Using xelatex/lualatex
+```bash
+# For advanced font support or Unicode
+xelatex TMA.tex
+# or
+lualatex TMA.tex
+```
+
+### Step 4: Edit and Work Locally
+
+1. **Open in Your LaTeX Editor:**
+   - Load `TMA.tex` as the main document
+   - Edit individual files (`q1a.tex`, `q1b.tex`, etc.) for your answers
+   - Use your editor's build system or compile manually
+
+2. **File Structure Understanding:**
+   ```
+   output-directory/
+   ├── TMA.tex           ← Main document (compile this)
+   ├── q1.tex            ← Question 1 master file
+   ├── q1a.tex           ← Question 1, part (a) - EDIT THIS
+   ├── q1b.tex           ← Question 1, part (b) - EDIT THIS
+   ├── q2.tex            ← Question 2 master file
+   ├── q2a.tex           ← Question 2, part (a) - EDIT THIS
+   ├── tma.sty           ← Style file (don't edit)
+   └── tma-extras.sty    ← Additional styles (don't edit)
+   ```
+
+3. **Editing Workflow:**
+   - **Don't edit** `TMA.tex` or `q1.tex, q2.tex` (these are structure files)
+   - **Do edit** the part files: `q1a.tex`, `q1b.tex`, `q2a.tex`, etc.
+   - Add your mathematical content, text, figures, etc. in the part files
+
+### TeX Live Troubleshooting
+
+#### Common Issues:
+
+**Error: "File `tma.sty' not found"**
+```bash
+# Ensure .sty files are in the same directory as TMA.tex
+# Or install them in your local texmf tree:
+mkdir -p ~/texmf/tex/latex/local
+cp tma.sty tma-extras.sty ~/texmf/tex/latex/local/
+texhash ~/texmf
+```
+
+**Compilation Errors:**
+```bash
+# Check for LaTeX syntax errors in your part files
+# Use your editor's syntax highlighting and error checking
+# Compile with verbose output:
+pdflatex -interaction=nonstopmode TMA.tex
+```
+
+**Missing Dependencies:**
+```bash
+# Install additional LaTeX packages if needed
+# TeX Live users:
+tlmgr install package-name
+
+# Ubuntu/Debian users:
+sudo apt install texlive-latex-extra texlive-math-extra
+
+# macOS users (with MacTeX):
+# Packages usually included, use TeX Live Utility if needed
+```
+
+### TeX Live vs Overleaf Comparison
+
+| Feature | TeX Live (Local) | Overleaf (Cloud) |
+|---------|-----------------|------------------|
+| **Setup** | Requires installation | Browser-based |
+| **Internet** | Offline capable | Requires internet |
+| **Performance** | Fast local compilation | Depends on connection |
+| **Storage** | Your local disk | Cloud storage |
+| **Collaboration** | Manual file sharing | Built-in sharing |
+| **Package Management** | Manual (tlmgr) | Automatic |
+| **Backup** | Your responsibility | Automatic |
+| **Privacy** | Completely local | Cloud-based |
+| **Cost** | Free (after installation) | Free/Paid tiers |
+
+**Choose TeX Live if you:**
+- Prefer working offline
+- Want maximum control over your LaTeX environment
+- Have limited/unreliable internet
+- Work with sensitive/confidential content
+- Need specific LaTeX packages or configurations
+
+**Choose Overleaf if you:**
+- Want zero setup requirements
+- Need collaboration features
+- Prefer automatic backups
+- Work on multiple devices
+- Want real-time preview and error highlighting
+
 ## 🛠️ Features
 
 ### User Interface
@@ -211,8 +355,16 @@ This project is licensed under the MIT Licence - see the [LICENCE](LICENCE) file
 This tool is specifically designed for students working on Tutor-Marked Assignments (TMAs). It streamlines the LaTeX document preparation process, allowing students to focus on content rather than file structure management.
 
 **Note**: This tool generates the LaTeX structure only. You'll need:
-- A LaTeX editor (TeXstudio, TeXworks, Overleaf, etc.)
-- Academic LaTeX style files (`tma.sty`)
+
+**For Overleaf users:**
+- Overleaf account (free or paid)
+- Web browser
+- Basic LaTeX knowledge for content creation
+
+**For TeX Live users:**
+- TeX Live installation ([Download here](https://tug.org/texlive/))
+- LaTeX editor (TeXstudio, TeXworks, VS Code with LaTeX Workshop, etc.)
+- Academic LaTeX style files (`tma.sty`, `tma-extras.sty`) - automatically included
 - Basic LaTeX knowledge for content creation
 
 ---
