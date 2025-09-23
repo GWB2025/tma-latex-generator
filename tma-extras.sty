@@ -8,7 +8,11 @@
 \ProvidesPackage{tma-extras}[2025/09/18 tma extras package]
 
 % ==================== PACKAGE REQUIREMENTS ====================
-\RequirePackage{luacode}
+% Load luacode only if using LuaTeX
+\RequirePackage{iftex}
+\ifLuaTeX
+  \RequirePackage{luacode}
+\fi
 \RequirePackage{dirtytalk}
 \RequirePackage{diagbox}
 \RequirePackage{calculator}

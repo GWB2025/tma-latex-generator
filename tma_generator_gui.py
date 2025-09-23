@@ -550,7 +550,7 @@ class LaTeXFileGenerator:
         # Generate document body
         lines.append("\\begin{document}")
         for i in range(number_of_questions):
-            lines.append(f"\\t\\include{{{QUESTION_PREFIX}{i+1}}}")
+            lines.append(f"\\include{{{QUESTION_PREFIX}{i+1}}}")
         lines.append("\\end{document}")
         
         return '\n'.join(lines)
@@ -639,8 +639,8 @@ class LaTeXFileGenerator:
         
         for part in parts:
             part_letter = chr(97 + ord(part) - ord('a'))  # Ensure lowercase
-            lines.append(f"\\t\\qpart %({part_letter})")
-            lines.append(f"\\t\\input{{{QUESTION_PREFIX}{question_number}{part}}}")
+            lines.append(f"\\qpart %({part_letter})")
+            lines.append(f"\\input{{{QUESTION_PREFIX}{question_number}{part}}}")
         
         lines.append("\\end{question}")
         return '\n'.join(lines)
