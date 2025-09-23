@@ -293,10 +293,11 @@ sudo apt install texlive-latex-extra texlive-math-extra
 
 ## 📚 Documentation
 
-- **[UI_ENHANCEMENTS.md](UI_ENHANCEMENTS.md)**: User interface improvements and tooltip system
-- **[CODE_QUALITY_IMPROVEMENTS.md](CODE_QUALITY_IMPROVEMENTS.md)**: Technical improvements and architecture
-- **[CHANGES.md](CHANGES.md)**: Change history and removed features
-- **[GITHUB_SETUP.md](GITHUB_SETUP.md)**: Repository setup and deployment guide
+This README contains comprehensive documentation for using the TMA LaTeX Generator. Additional help is available through:
+
+- **Built-in Help System**: Click the "Help" button in the application for detailed usage instructions
+- **GitHub Issues**: Report bugs or request features
+- **GitHub Discussions**: Community support and questions
 
 ## 🏗️ Architecture
 
