@@ -400,11 +400,12 @@ const Validation = {
      */
     validateQuestions(questions) {
         const errors = [];
+        const warnings = [];
         let totalMarks = 0;
 
         if (questions.length === 0) {
             errors.push('At least one question is required');
-            return { isValid: false, errors, totalMarks };
+            return { isValid: false, errors, warnings, totalMarks };
         }
 
         questions.forEach((question, index) => {
@@ -437,14 +438,15 @@ const Validation = {
             }
         });
 
-        // Check total marks
+        // Check total marks - now as warning instead of error
         if (totalMarks !== 100) {
-            errors.push(`Total marks should equal 100 (currently: ${totalMarks})`);
+            warnings.push(`Total marks should equal 100 (currently: ${totalMarks})`);
         }
 
         return {
             isValid: errors.length === 0,
             errors,
+            warnings,
             totalMarks
         };
     },
@@ -490,6 +492,14 @@ const Validation = {
     showErrors(errors) {
         const errorMessage = errors.join('\n• ');
         Utils.showNotification(`Validation Errors:\n• ${errorMessage}`, 'error', 8000);
+    },
+
+    /**
+     * Show validation warnings
+     */
+    showWarnings(warnings) {
+        const warningMessage = warnings.join('\n• ');
+        Utils.showNotification(`Validation Warnings:\n• ${warningMessage}\n\nYou can continue with generation if needed.`, 'warning', 6000);
     }
 };
 
@@ -1174,7 +1184,8 @@ const UI = {
                 <h3>💡 Tips</h3>
                 <ul>
                     <li>Settings are automatically saved as you type</li>
-                    <li>Total marks should equal 100 for most TMAs</li>
+                    <li>Total marks typically equal 100 for most TMAs, but this isn't always required</li>
+                    <li>If marks don't total 100, you'll see a warning but can still generate files</li>
                     <li>Use consistent part naming (lowercase: a,b,c)</li>
                     <li>Test with simple structures first</li>
                     <li>The app works entirely in your browser - no data is sent to servers</li>
@@ -1248,6 +1259,11 @@ const UI = {
             if (!questionsValidation.isValid) {
                 Validation.showErrors(questionsValidation.errors);
                 return;
+            }
+
+            // Show warnings but allow continuation
+            if (questionsValidation.warnings && questionsValidation.warnings.length > 0) {
+                Validation.showWarnings(questionsValidation.warnings);
             }
 
             // Generate output log
