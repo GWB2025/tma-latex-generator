@@ -57,7 +57,7 @@ jobs:
         run: |
           echo "🔍 Basic CSS validation..."
           # Check for basic CSS structure
-          grep -q "html\|body\|\.container" styles.css && echo "✅ CSS structure looks good" || (echo "❌ CSS structure issues" && exit 1)
+          grep -q "html\|body\|container" styles.css && echo "✅ CSS structure looks good" || (echo "❌ CSS structure issues" && exit 1)
 
       - name: Check file sizes
         run: |
@@ -131,8 +131,8 @@ jobs:
           done
           
           # Verify HTML contains required elements
-          grep -q 'TMA LaTeX Generator' index.html || (echo "❌ HTML title missing" && exit 1)
-          grep -q 'jszip' index.html || (echo "❌ JSZip library missing" && exit 1)
+          grep -q "TMA LaTeX Generator" index.html || (echo "❌ HTML title missing" && exit 1)
+          grep -q "jszip" index.html || (echo "❌ JSZip library missing" && exit 1)
           
           echo "✅ Deployment validation passed"
 
@@ -178,6 +178,6 @@ jobs:
       - name: Success notification
         run: |
           echo "🎉 TMA LaTeX Generator deployment successful!"
-          echo "🌐 Live at: https://gwb2025.github.io/tma-latex-generator-browser/"
+          echo "🌐 Live at: https://gwb2025.github.io/tma-latex-generator/"
           echo "📚 Students worldwide can now generate professional LaTeX documents!"
           echo "🚀 Zero installation, browser-based, academic-grade tool is live!"
