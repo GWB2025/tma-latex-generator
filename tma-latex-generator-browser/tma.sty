@@ -1,0 +1,86 @@
+%% File: tma.sty
+%% This is a STYLE file - DO NOT EDIT!
+%% This file provides the main LaTeX styling and document structure for TMAs.
+%% Editing this file may break the document formatting.
+%% Generated/Copied by TMA LaTeX Generator
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tma}[2023/09/04 tma package]
+
+% 1. Load essential packages first
+\RequirePackage{fancyhdr}
+\RequirePackage{amsmath,amssymb} % tma-extras might need these
+\RequirePackage{geometry}
+\RequirePackage{xspace}
+\RequirePackage{marginnote}
+\RequirePackage{bm}
+
+% 2. Question environment and counters - MOVED BEFORE tma-extras
+\newcounter{question}
+\newcounter{qpart}[question]
+\newcounter{qsubpart}[qpart]
+
+\renewcommand{\thequestion}{\arabic{question}}
+\renewcommand{\theqpart}{\alph{qpart}}
+\renewcommand{\theqsubpart}{\roman{qsubpart}}
+
+% 3. Load the comprehensive extras package - NOW AFTER COUNTERS
+\RequirePackage{tma-extras} % This defines math commands, operators, etc.
+
+% 4. Geometry settings
+\geometry{
+    headheight=10mm,
+    headsep=5mm,
+    bottom=25mm,
+    footskip=15mm,
+    lmargin=30mm,
+    rmargin=5mm,
+    includemp,
+    marginparwidth=37mm,
+    marginparsep=5mm
+}
+\setlength{\headwidth}{\textwidth}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2 ex plus 0.3 ex minus 0.2 ex}
+
+% 5. User information commands
+\newcommand{\name}{\relax}
+\newcommand{\tma}{\relax}
+\newcommand{\course}{\relax}
+\newcommand{\pin}{\relax}
+\newcommand{\cod}{\relax}
+
+\newcommand{\myname}[1]{\renewcommand{\name}{#1}}
+\newcommand{\mytma}[1]{\renewcommand{\tma}{#1}}
+\newcommand{\mycourse}[1]{\renewcommand{\course}{#1}}
+\newcommand{\mypin}[1]{\renewcommand{\pin}{#1}}
+\newcommand{\mycod}[1]{\renewcommand{\cod}{#1}}
+
+% 6. Question environment
+\newenvironment{question}[1][0]{%
+    \stepcounter{question}%
+    \makebox[0pt][r]{\large{Q \thequestion .\quad}}\par
+    \setcounter{page}{1}%
+}{%
+    \par \vspace{3em}%
+}
+
+\newcommand{\qpart}[1][0]{%
+    \stepcounter{qpart}\par%
+    \makebox[0pt][r]{\large{(\theqpart)\quad}}%
+}
+
+\newcommand{\qsubpart}[1][0]{%
+    \stepcounter{qsubpart}\par%
+    \makebox[0pt][r]{\large{(\theqsubpart)\quad}}%
+}
+
+% 7. Page style (header/footer)
+\pagestyle{fancy}
+\lhead{\textrm{\name\ \pin}}
+\chead{\textrm{\course\ TMA-\tma}}
+\rhead{\textrm{Due: \cod}}
+
+% Numbering for equations is already handled by tma-extras
+% \numberwithin{equation}{question} is in tma-extras
+\endinput

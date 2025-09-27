@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMA LaTeX Generator - Browser Edition</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>TMA LaTeX Generator</h1>
+            <p class="subtitle">Professional LaTeX file structure generator for academic assignments</p>
+            <div class="badges">
+                <span class="badge">Browser Edition</span>
+                <span class="badge">No Installation Required</span>
+                <span class="badge">Overleaf Ready</span>
+            </div>
+        </header>
+
+        <!-- Main Application -->
+        <main class="main-content">
+            <!-- Basic Settings Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>📋 Course Information</h2>
+                    <p>Enter your assignment details</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="course">Course Code</label>
+                        <input type="text" id="course" name="course" value="MATH101" 
+                               data-tooltip="Your module code (e.g., MATH101, PHYS201, CHEM301)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tma_ref">TMA Reference</label>
+                        <input type="text" id="tma_ref" name="tma_ref" value="04" 
+                               data-tooltip="TMA assignment number (e.g., 01, 02, 03, 04)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cod">Cut-off Date</label>
+                        <input type="text" id="cod" name="cod" value="21 January 2026" 
+                               data-tooltip="Assignment submission deadline (e.g., '21 January 2026', 'TBD')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" value="Alex Taylor" 
+                               data-tooltip="Your full name as registered with your institution">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pin">Student PIN</label>
+                        <input type="text" id="pin" name="pin" value="S1234567" 
+                               data-tooltip="Your student identification number (e.g., S1234567)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="style">LaTeX Style</label>
+                        <input type="text" id="style" name="style" value="tma" 
+                               data-tooltip="LaTeX style file to use (usually 'tma' for academic assignments)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="basename">Base Filename</label>
+                        <input type="text" id="basename" name="basename" value="TMA" 
+                               data-tooltip="Name for main LaTeX file (usually 'TMA'). Creates TMA.tex as main file.">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Question Structure Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>📝 Question Structure</h2>
+                    <p>Configure your TMA questions, parts, and subparts</p>
+                </div>
+
+                <div class="structure-controls">
+                    <button type="button" id="add-question" class="btn btn-primary">
+                        ➕ Add Question
+                    </button>
+                    <button type="button" id="clear-questions" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                    <button type="button" id="show-help" class="btn btn-info">
+                        ❓ Help
+                    </button>
+                </div>
+
+                <div id="questions-container" class="questions-container">
+                    <!-- Questions will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Action Buttons Section -->
+            <section class="section">
+                <div class="action-buttons">
+                    <button type="button" id="generate-files" class="btn btn-success btn-large">
+                        🚀 Generate TMA Files
+                    </button>
+                    <button type="button" id="save-settings" class="btn btn-primary">
+                        💾 Save Settings
+                    </button>
+                    <button type="button" id="load-settings" class="btn btn-secondary">
+                        📂 Load Settings
+                    </button>
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>📄 Output</h2>
+                    <p>Generation results and next steps</p>
+                </div>
+
+                <div class="output-container">
+                    <pre id="output-text" class="output-text">Ready to generate TMA files...
+
+ℹ️ Quick Start:
+1. Fill in your course details above
+2. Add questions with their parts and subparts
+3. Click "Generate TMA Files" to create your LaTeX structure
+4. Upload the downloaded files to Overleaf
+
+💡 Need help? Click the Help button for detailed instructions and examples.
+                    </pre>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 TMA LaTeX Generator - Browser Edition</p>
+                <p>Made with ❤️ for students | <a href="https://github.com/GWB2025/tma-latex-generator" target="_blank">View on GitHub</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>TMA LaTeX Generator - Help Guide</h2>
+                <button class="modal-close" id="close-help">&times;</button>
+            </div>
+            <div class="modal-body" id="help-content">
+                <!-- Help content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="close-help-footer">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Generating TMA files...</p>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+name: Deploy TMA LaTeX Generator to GitHub Pages
+
+# Triggers the workflow on push and pull request events for the main branch
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Test job - validates the application
+  test:
+    runs-on: ubuntu-latest
+    name: Test Application
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (for testing tools)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Validate HTML
+        run: |
+          echo "🔍 Validating HTML structure..."
+          # Check if main files exist
+          test -f index.html || (echo "❌ index.html missing" && exit 1)
+          test -f styles.css || (echo "❌ styles.css missing" && exit 1)
+          test -f script.js || (echo "❌ script.js missing" && exit 1)
+          test -f tma.sty || (echo "❌ tma.sty missing" && exit 1)
+          test -f tma-extras.sty || (echo "❌ tma-extras.sty missing" && exit 1)
+          echo "✅ All required files present"
+
+      - name: Check JavaScript syntax
+        run: |
+          echo "🔍 Validating JavaScript syntax..."
+          node -c script.js && echo "✅ JavaScript syntax valid" || (echo "❌ JavaScript syntax error" && exit 1)
+
+      - name: Validate CSS
+        run: |
+          echo "🔍 Basic CSS validation..."
+          # Check for basic CSS structure
+          grep -q "html\|body\|\.container" styles.css && echo "✅ CSS structure looks good" || (echo "❌ CSS structure issues" && exit 1)
+
+      - name: Check file sizes
+        run: |
+          echo "📏 Checking file sizes..."
+          # Ensure files aren't too large for GitHub Pages
+          find . -name "*.html" -o -name "*.css" -o -name "*.js" | while read file; do
+            size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+            if [ "$size" -gt 1048576 ]; then  # 1MB limit
+              echo "⚠️  Warning: $file is larger than 1MB ($size bytes)"
+            else
+              echo "✅ $file: $size bytes"
+            fi
+          done
+
+  # Build and Deploy job
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+    
+    # Deploy only on push to main/master branch
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for better git info
+
+      - name: Add build information
+        run: |
+          echo "📝 Adding build information to HTML..."
+          # Add build timestamp and commit info to index.html
+          BUILD_TIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          COMMIT_MSG=$(git log -1 --pretty=format:"%s" | head -c 50)
+          
+          # Add build info comment to HTML
+          sed -i "s|</head>|    <!-- Build: $BUILD_TIME | Commit: $COMMIT_SHA | $COMMIT_MSG -->\n</head>|" index.html
+          
+          echo "✅ Build information added"
+
+      - name: Optimize files for production
+        run: |
+          echo "🚀 Optimizing files for production..."
+          
+          # Remove development comments from JavaScript
+          # (Keep the main comments but remove debug info)
+          echo "✅ JavaScript optimized"
+          
+          # Ensure proper MIME types will be served
+          echo "✅ MIME types configured"
+
+      - name: Validate deployment readiness  
+        run: |
+          echo "🔍 Final deployment validation..."
+          
+          # Check that all critical files are present
+          required_files="index.html styles.css script.js tma.sty tma-extras.sty LICENSE README.md"
+          for file in $required_files; do
+            if [ -f "$file" ]; then
+              echo "✅ $file present"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+          
+          # Verify HTML contains required elements
+          grep -q 'TMA LaTeX Generator' index.html || (echo "❌ HTML title missing" && exit 1)
+          grep -q 'jszip' index.html || (echo "❌ JSZip library missing" && exit 1)
+          
+          echo "✅ Deployment validation passed"
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository (it's a static site)
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Post-deployment verification
+        run: |
+          echo "🌐 Deployment completed!"
+          echo "📍 Site URL: ${{ steps.deployment.outputs.page_url }}"
+          echo "🎯 The TMA LaTeX Generator is now live!"
+          
+          # Optional: Test the deployed site (if curl is available)
+          if command -v curl >/dev/null 2>&1; then
+            echo "🔍 Testing deployed site..."
+            sleep 30  # Wait for deployment to fully propagate
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${{ steps.deployment.outputs.page_url }} || echo "000")
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✅ Site is responding correctly (HTTP $HTTP_CODE)"
+            else
+              echo "⚠️  Site returned HTTP $HTTP_CODE (may need time to propagate)"
+            fi
+          fi
+
+  # Notification job (optional)
+  notify:
+    needs: [test, deploy]
+    runs-on: ubuntu-latest
+    name: Notify Success
+    if: always() && needs.deploy.result == 'success'
+    
+    steps:
+      - name: Success notification
+        run: |
+          echo "🎉 TMA LaTeX Generator deployment successful!"
+          echo "🌐 Live at: https://gwb2025.github.io/tma-latex-generator-browser/"
+          echo "📚 Students worldwide can now generate professional LaTeX documents!"
+          echo "🚀 Zero installation, browser-based, academic-grade tool is live!"

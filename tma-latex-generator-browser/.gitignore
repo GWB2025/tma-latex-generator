@@ -1,0 +1,98 @@
+# ==================== BROWSER-BASED PROJECT .GITIGNORE ====================
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor & IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-workspace
+.sublime-project
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Build & Distribution
+dist/
+build/
+out/
+*.zip
+*.tar.gz
+
+# Development Server Files
+.server/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Testing Files
+coverage/
+.nyc_output/
+test-results/
+*.lcov
+
+# Local Environment Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Browser Extension Development
+extension/
+manifest.json.backup
+
+# Documentation Generation
+docs/_build/
+site/
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Local Configuration
+config.local.json
+settings.local.json
+
+# Generated Files
+*.generated.js
+*.generated.css
+*.min.js
+*.min.css
+
+# Lock Files (for simple projects, we don't need these)
+composer.lock
+Pipfile.lock
+
+# GitHub Pages (these are handled automatically)
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ignore any local test HTML files
+test*.html
+demo*.html
+example*.html
+
+# Ignore any personal notes or TODO files
+NOTES.md
+TODO.md
+PERSONAL.md
