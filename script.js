@@ -122,15 +122,15 @@ const Utils = {
             styles.textContent = `
                 .notification {
                     position: fixed;
-                    top: 20px;
+                    bottom: 20px;
                     right: 20px;
-                    z-index: 3000;
+                    z-index: 9999;
                     background: white;
                     border-radius: 8px;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                     border-left: 4px solid #007acc;
                     max-width: 400px;
-                    animation: slideInRight 0.3s ease;
+                    animation: slideInUp 0.3s ease;
                 }
                 .notification-success { border-left-color: #28a745; }
                 .notification-error { border-left-color: #dc3545; }
@@ -156,9 +156,13 @@ const Utils = {
                     width: 20px;
                     height: 20px;
                 }
-                @keyframes slideInRight {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
+                @keyframes slideInUp {
+                    from { transform: translateY(100%); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                @keyframes slideOutDown {
+                    from { transform: translateY(0); opacity: 1; }
+                    to { transform: translateY(100%); opacity: 0; }
                 }
             `;
             document.head.appendChild(styles);
@@ -170,7 +174,7 @@ const Utils = {
         // Add close functionality
         const closeBtn = notification.querySelector('.notification-close');
         const close = () => {
-            notification.style.animation = 'slideInRight 0.3s ease reverse';
+            notification.style.animation = 'slideOutDown 0.3s ease';
             setTimeout(() => notification.remove(), 300);
         };
 
@@ -500,7 +504,7 @@ const Validation = {
      */
     showWarnings(warnings) {
         const warningMessage = warnings.join('\n• ');
-        Utils.showNotification(`Validation Warnings:\n• ${warningMessage}\n\nYou can continue with generation if needed.`, 'warning', 6000);
+        Utils.showNotification(`Validation Warnings:\n• ${warningMessage}\n\nYou can continue with generation if needed.`, 'warning', 8000);
     }
 };
 
@@ -1265,6 +1269,8 @@ const UI = {
             // Show warnings but allow continuation
             if (questionsValidation.warnings && questionsValidation.warnings.length > 0) {
                 Validation.showWarnings(questionsValidation.warnings);
+                // Small delay to ensure warning is visible before download dialog
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
             // Generate output log
