@@ -1,33 +1,77 @@
 # TMA LaTeX Generator
 
 > **Professional LaTeX file structure generator for academic TMA (Tutor-Marked Assignment) submissions**
+> 
+> 🌐 **NEW**: Now available as a **zero-installation browser app** alongside the original desktop version!
+
+[![Live Browser App](https://img.shields.io/badge/🌐_Browser_App-Try_Now!-brightgreen?style=for-the-badge)](https://gwb2025.github.io/tma-latex-generator/)
+[![Python Desktop](https://img.shields.io/badge/🖥️_Desktop_App-Download-blue?style=for-the-badge&logo=python)](https://github.com/GWB2025/tma-latex-generator/releases)
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Code style: PEP 8](https://img.shields.io/badge/code%20style-PEP%208-blue)](https://peps.python.org/pep-0008/)
 [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licences/MIT)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live-success?logo=github)](https://gwb2025.github.io/tma-latex-generator/)
 
 ## 🎯 Overview
 
-The TMA LaTeX Generator is a professional GUI application that creates structured LaTeX file hierarchies for academic assignments, specifically designed for use with **Overleaf**. Instead of manually creating multiple interconnected LaTeX files, this tool generates the complete structure based on your question configuration, ready to upload to Overleaf.
+The TMA LaTeX Generator creates structured LaTeX file hierarchies for academic assignments, specifically designed for use with **Overleaf**. Instead of manually creating multiple interconnected LaTeX files, this tool generates the complete structure based on your question configuration, ready to upload to Overleaf.
 
-### ✨ Key Features
+### 🚀 **Two Ways to Use This Tool**
 
-- **📋 Intuitive GUI**: Easy-to-use interface with tooltips and comprehensive help
-- **🔧 Manual Structure Configuration**: Define questions, parts, and subparts precisely
+| 🌐 **Browser Version** | 🖥️ **Desktop Version** |
+|------------------------|-------------------------|
+| ✅ **No installation required** | ⚙️ **Local Python application** |
+| ✅ **Works on any device** | 🖥️ **Desktop GUI with tkinter** |
+| ✅ **Always up-to-date** | 📁 **File system integration** |
+| ✅ **Mobile-friendly** | 🔒 **Complete offline operation** |
+| **[🌐 Launch Browser App](https://gwb2025.github.io/tma-latex-generator/)** | **[📥 Download Desktop App](#-desktop-version-installation)** |
+
+### ✨ Key Features (Both Versions)
+
+- **📋 Intuitive Interface**: Easy-to-use with tooltips and comprehensive help
+- **🔧 Precise Structure Configuration**: Define questions, parts, and subparts exactly as needed
 - **📁 Complete File Generation**: Creates main document and all component files
 - **⚙️ Persistent Settings**: Saves your configuration for future use
-- **🎨 Professional Code Quality**: PEP 8 compliant, fully documented, type-hinted
+- **🎨 Professional LaTeX Output**: Academic-grade formatting with comprehensive style files
+- **🌍 Overleaf Integration**: Optimised workflow for cloud-based LaTeX editing
+- **📱 Universal Access**: Browser version works on any device, anywhere
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 🌐 **Browser Version (Recommended for New Users)**
 
+**No installation required! Works immediately in any modern browser.**
+
+1. **🌐 Open the Browser App:**
+   **👉 [Launch TMA Generator](https://gwb2025.github.io/tma-latex-generator/) 👈**
+
+2. **📝 Configure your TMA:**
+   - Fill in course details (Course Code, TMA Reference, Your Name, Cut-off Date)
+   - Set up question structure (marks, parts, subparts)
+   - Settings automatically saved in your browser
+
+3. **🚀 Generate & Download:**
+   - Click "Generate TMA Files" to download ZIP file
+   - Contains all LaTeX files ready for Overleaf
+
+4. **📤 Upload to Overleaf:**
+   - Create new blank project in Overleaf
+   - Upload all files from the downloaded ZIP
+   - Compile and start writing!
+
+---
+
+### 🖥️ **Desktop Version Installation**
+
+**For users who prefer local desktop applications:**
+
+#### Prerequisites
 - Python 3.8 or higher
 - tkinter (usually included with Python)
 - Overleaf account (free or paid)
-- Academic LaTeX style files (included: `tma.sty`, `tma-extras.sty`)
 
-### Installation
+#### Installation Steps
 
 1. **Clone the repository:**
    ```bash
@@ -35,24 +79,39 @@ The TMA LaTeX Generator is a professional GUI application that creates structure
    cd tma-latex-generator
    ```
 
-2. **Run the application:**
+2. **Run the desktop application:**
    ```bash
    python tma_generator_gui.py
    ```
 
-3. **Configure your TMA:**
-   - Fill in course details (Course Code, TMA Reference, etc.)
-   - Set up question structure (marks, parts, subparts)
+3. **Configure and generate:**
+   - Fill in course details and question structure
    - Choose output directory
    - Click "Generate TMA Files"
+   - Upload generated files to Overleaf
 
-4. **Upload to Overleaf:**
-   - Create a new blank project in Overleaf
-   - Delete the default files (main.tex, etc.)
-   - Upload all files from your output directory
-   - Compile and start writing!
+---
 
-## 📖 Usage
+## 🌟 **Which Version Should You Choose?**
+
+### ✅ **Choose Browser Version If You:**
+- Want **immediate access** without any setup
+- Use **multiple devices** (laptop, tablet, phone)
+- Work on **Chromebooks** or shared computers
+- Prefer **always up-to-date** applications
+- Need **mobile accessibility** for quick edits
+- Want **zero maintenance** and automatic updates
+
+### ✅ **Choose Desktop Version If You:**
+- Prefer **traditional desktop applications**
+- Need **complete offline operation**
+- Want **deep file system integration**
+- Have **specific Python workflow requirements**
+- Prefer **local file management** over browser downloads
+
+---
+
+## 📖 Usage (Both Versions)
 
 ### Basic Configuration
 
@@ -293,14 +352,24 @@ sudo apt install texlive-latex-extra texlive-math-extra
 
 ## 📚 Documentation
 
-This README contains comprehensive documentation for using the TMA LaTeX Generator. Additional help is available through:
+### 🌐 **Browser Version Documentation**
+- **📖 [Complete Browser Documentation](tma-latex-generator-browser/README.md)**
+- **🌐 [Live Demo & Help](https://gwb2025.github.io/tma-latex-generator/)** - In-app help system
+- **⌨️ Keyboard Shortcuts**: Ctrl+H for help, Ctrl+G to generate, Ctrl+S to save
 
-- **Built-in Help System**: Click the "Help" button in the application for detailed usage instructions
-- **GitHub Issues**: Report bugs or request features
-- **GitHub Discussions**: Community support and questions
+### 🖥️ **Desktop Version Documentation**
+- **📖 This README** - Complete desktop usage guide
+- **🔘 Built-in Help**: Click the "Help" button in the desktop application
+- **💡 Tooltips**: Hover guidance on every field
+
+### 🤝 **Community Support**
+- **🐛 [Report Issues](https://github.com/GWB2025/tma-latex-generator/issues)**
+- **💬 [Discussions](https://github.com/GWB2025/tma-latex-generator/discussions)**
+- **📧 Feature Requests**: Via GitHub Issues
 
 ## 🏗️ Architecture
 
+### 🖥️ **Desktop Version (Python)**
 ```
 tma_generator_gui.py
 ├── ConfigManager          # Configuration file handling
@@ -308,6 +377,24 @@ tma_generator_gui.py
 ├── TMAGeneratorGUI        # Main application interface
 ├── ToolTip               # UI tooltip system
 └── HelpDialog            # Comprehensive help system
+```
+
+### 🌐 **Browser Version (JavaScript)**
+```
+tma-latex-generator-browser/
+├── index.html             # Main application interface
+├── script.js              # Complete application logic (1,400+ lines)
+│   ├── CONFIG            # Application constants
+│   ├── State             # Global state management
+│   ├── Utils             # Utility functions
+│   ├── Storage           # LocalStorage persistence
+│   ├── Tooltip           # Interactive help system
+│   ├── Validation        # Input validation engine
+│   ├── LaTeXGenerator    # File generation engine
+│   └── UI                # User interface management
+├── styles.css            # Complete responsive styling (750+ lines)
+├── tma.sty               # LaTeX main style file
+└── tma-extras.sty        # Extended LaTeX commands
 ```
 
 ## 🤝 Contributing
@@ -345,11 +432,22 @@ This project is licensed under the MIT Licence - see the [LICENCE](LICENCE) file
 - **Python Community**: For the excellent tkinter framework and development tools
 - **Contributors**: Thanks to all who have contributed to making this tool better
 
-## 📞 Support
+## 📞 Support & Links
 
-- **Issues**: [GitHub Issues](https://github.com/GWB2025/tma-latex-generator/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/GWB2025/tma-latex-generator/discussions)
-- **Documentation**: Built-in help system (Help button in application)
+### 🌐 **Browser Version**
+- **🚀 [Live Application](https://gwb2025.github.io/tma-latex-generator/)**
+- **📖 [Browser Documentation](tma-latex-generator-browser/README.md)**
+- **💡 In-app Help**: Press Ctrl+H or click Help button
+
+### 🖥️ **Desktop Version**
+- **📥 [Download/Clone](https://github.com/GWB2025/tma-latex-generator)**
+- **💡 Built-in Help**: Help button in desktop application
+- **📖 Documentation**: This README file
+
+### 🤝 **Community**
+- **🐛 [Issues](https://github.com/GWB2025/tma-latex-generator/issues)** - Bug reports & feature requests
+- **💬 [Discussions](https://github.com/GWB2025/tma-latex-generator/discussions)** - Community support
+- **⭐ [Star this repo](https://github.com/GWB2025/tma-latex-generator)** - If this tool helps you!
 
 ## 🎓 Educational Use
 
@@ -368,6 +466,23 @@ This tool is specifically designed for students working on Tutor-Marked Assignme
 - Academic LaTeX style files (`tma.sty`, `tma-extras.sty`) - automatically included
 - Basic LaTeX knowledge for content creation
 
+### 🌟 **Quick Links Summary**
+
+| Resource | Browser Version | Desktop Version |
+|----------|----------------|------------------|
+| **🚀 Launch/Download** | **[Try Now](https://gwb2025.github.io/tma-latex-generator/)** | **[Download](https://github.com/GWB2025/tma-latex-generator)** |
+| **📖 Documentation** | **[Browser README](tma-latex-generator-browser/README.md)** | **This README** |
+| **💡 Help System** | In-app (Ctrl+H) | In-app (Help button) |
+| **🎯 Best For** | Quick access, mobile, any device | Desktop users, offline work |
+
 ---
 
-**Made with ❤️ for students by the community**
+<div align="center">
+
+**Made with ❤️ for students worldwide**
+
+*Empowering academic excellence through technology*
+
+**[🌐 Try Browser Version](https://gwb2025.github.io/tma-latex-generator/)** • **[🖥️ Use Desktop Version](#-desktop-version-installation)** • **[⭐ Star This Repo](https://github.com/GWB2025/tma-latex-generator)**
+
+</div>

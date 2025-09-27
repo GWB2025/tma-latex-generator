@@ -2,8 +2,8 @@
 
 > **🎓 Professional LaTeX file structure generator for academic TMA assignments - Zero installation required!**
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now!-brightgreen?style=for-the-badge)](https://gwb2025.github.io/tma-latex-generator-browser/)
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Deployed-blue?style=for-the-badge&logo=github)](https://gwb2025.github.io/tma-latex-generator-browser/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now!-brightgreen?style=for-the-badge)](https://gwb2025.github.io/tma-latex-generator/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Deployed-blue?style=for-the-badge&logo=github)](https://gwb2025.github.io/tma-latex-generator/)
 [![Overleaf Ready](https://img.shields.io/badge/Overleaf-Ready-orange?style=for-the-badge&logo=overleaf)](https://www.overleaf.com/)
 
 [![Browser Compatible](https://img.shields.io/badge/Browser-Compatible-brightgreen?logo=googlechrome)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
@@ -15,7 +15,7 @@
 
 ## 🚀 **Try It Now - No Installation Required!**
 
-**👉 [Launch TMA Generator](https://gwb2025.github.io/tma-latex-generator-browser/) 👈**
+**👉 [Launch TMA Generator](https://gwb2025.github.io/tma-latex-generator/) 👈**
 
 *Works instantly in any modern browser - Chrome, Firefox, Safari, Edge*
 
@@ -67,9 +67,9 @@ Creating properly structured LaTeX documents with multiple questions, parts, and
 ## 🎬 **Quick Start Demo**
 
 ### 1. **🌐 Open the App**
-**[Click here to launch](https://gwb2025.github.io/tma-latex-generator-browser/)** or visit:
+**[Click here to launch](https://gwb2025.github.io/tma-latex-generator/)** or visit:
 ```
-https://gwb2025.github.io/tma-latex-generator-browser/
+https://gwb2025.github.io/tma-latex-generator/
 ```
 
 ### 2. **📝 Configure Your TMA**
@@ -262,8 +262,8 @@ Creates Q1(a) with 3 subparts, Q1(b) simple, Q1(c) with 2 subparts.
 
 ```bash
 # Clone the repository
-git clone https://github.com/GWB2025/tma-latex-generator-browser.git
-cd tma-latex-generator-browser
+git clone https://github.com/GWB2025/tma-latex-generator.git
+cd tma-latex-generator
 
 # Serve locally (choose one method)
 python -m http.server 8080    # Python
@@ -384,12 +384,12 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ### **Getting Help**
 - 📚 **Documentation**: This README and in-app help system
-- 💬 **Issues**: [GitHub Issues](https://github.com/GWB2025/tma-latex-generator-browser/issues)
-- 🤝 **Discussions**: [GitHub Discussions](https://github.com/GWB2025/tma-latex-generator-browser/discussions)
+- 💬 **Issues**: [GitHub Issues](https://github.com/GWB2025/tma-latex-generator/issues)
+- 🤝 **Discussions**: [GitHub Discussions](https://github.com/GWB2025/tma-latex-generator/discussions)
 
 ### **Quick Links**
-- 🌐 **Live Demo**: https://gwb2025.github.io/tma-latex-generator-browser/
-- 📦 **Repository**: https://github.com/GWB2025/tma-latex-generator-browser
+- 🌐 **Live Demo**: https://gwb2025.github.io/tma-latex-generator/
+- 📦 **Repository**: https://github.com/GWB2025/tma-latex-generator
 - 🖥️ **Desktop Version**: https://github.com/GWB2025/tma-latex-generator
 - 🍃 **Overleaf**: https://www.overleaf.com/
 
@@ -399,7 +399,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 If this tool helps you create better academic documents, please **⭐ star this repository** to help others discover it!
 
-**[⭐ Star on GitHub](https://github.com/GWB2025/tma-latex-generator-browser)** | **[🌐 Try Live Demo](https://gwb2025.github.io/tma-latex-generator-browser/)** | **[📖 View Documentation](README.md)**
+**[⭐ Star on GitHub](https://github.com/GWB2025/tma-latex-generator)** | **[🌐 Try Live Demo](https://gwb2025.github.io/tma-latex-generator/)** | **[📖 View Documentation](README.md)**
 
 ---
 
@@ -409,6 +409,6 @@ If this tool helps you create better academic documents, please **⭐ star this 
 
 *Empowering academic excellence through technology*
 
-**[🚀 Launch TMA Generator Now](https://gwb2025.github.io/tma-latex-generator-browser/)**
+**[🚀 Launch TMA Generator Now](https://gwb2025.github.io/tma-latex-generator/)**
 
 </div>
