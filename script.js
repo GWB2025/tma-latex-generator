@@ -102,7 +102,7 @@ const Utils = {
     },
 
     /**
-     * Show notification
+     * Show notification with stacking support
      */
     showNotification(message, type = 'info', duration = 3000) {
         // Create notification element
@@ -122,7 +122,6 @@ const Utils = {
             styles.textContent = `
                 .notification {
                     position: fixed;
-                    bottom: 20px;
                     right: 20px;
                     z-index: 9999;
                     background: white;
@@ -130,6 +129,7 @@ const Utils = {
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                     border-left: 4px solid #007acc;
                     max-width: 400px;
+                    margin-bottom: 8px;
                     animation: slideInUp 0.3s ease;
                 }
                 .notification-success { border-left-color: #28a745; }
@@ -168,6 +168,18 @@ const Utils = {
             document.head.appendChild(styles);
         }
 
+        // Calculate position to avoid overlapping with existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        let bottomOffset = 20;
+        
+        existingNotifications.forEach(existing => {
+            const rect = existing.getBoundingClientRect();
+            const currentBottom = window.innerHeight - rect.top;
+            bottomOffset = Math.max(bottomOffset, currentBottom + 8);
+        });
+        
+        notification.style.bottom = `${bottomOffset}px`;
+
         // Add to DOM
         document.body.appendChild(notification);
 
@@ -175,7 +187,10 @@ const Utils = {
         const closeBtn = notification.querySelector('.notification-close');
         const close = () => {
             notification.style.animation = 'slideOutDown 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
+            setTimeout(() => {
+                notification.remove();
+                this.repositionNotifications();
+            }, 300);
         };
 
         closeBtn.addEventListener('click', close);
@@ -186,6 +201,40 @@ const Utils = {
         }
 
         return notification;
+    },
+
+    /**
+     * Reposition remaining notifications to close gaps
+     */
+    repositionNotifications() {
+        const notifications = document.querySelectorAll('.notification');
+        let bottomOffset = 20;
+        
+        // Reposition from bottom to top with smooth animation
+        Array.from(notifications).reverse().forEach(notification => {
+            notification.style.transition = 'bottom 0.2s ease';
+            notification.style.bottom = `${bottomOffset}px`;
+            const rect = notification.getBoundingClientRect();
+            bottomOffset += rect.height + 8;
+        });
+        
+        // Remove transition after animation completes
+        setTimeout(() => {
+            notifications.forEach(notification => {
+                notification.style.transition = '';
+            });
+        }, 200);
+    },
+
+    /**
+     * Clear all notifications
+     */
+    clearNotifications() {
+        const notifications = document.querySelectorAll('.notification');
+        notifications.forEach(notification => {
+            notification.style.animation = 'slideOutDown 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        });
     }
 };
 
