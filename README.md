@@ -486,3 +486,4 @@ This tool is specifically designed for students working on Tutor-Marked Assignme
 **[🌐 Try Browser Version](https://gwb2025.github.io/tma-latex-generator/)** • **[🖥️ Use Desktop Version](#-desktop-version-installation)** • **[⭐ Star This Repo](https://github.com/GWB2025/tma-latex-generator)**
 
 </div>
+<!-- GitHub Pages configured: 2025-09-27 18:20:12 -->
