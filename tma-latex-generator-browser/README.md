@@ -411,4 +411,4 @@ If this tool helps you create better academic documents, please **⭐ star this 
 
 **[🚀 Launch TMA Generator Now](https://gwb2025.github.io/tma-latex-generator/)**
 
-</div>
+</div><!-- GitHub Pages deployment trigger -->
