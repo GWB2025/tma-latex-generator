@@ -46,7 +46,7 @@ DEFAULT_CONFIG = {
     "cod": "21 January 2026",
     "name": "Alex Taylor",
     "pin": "S1234567",
-    "style": "tma",
+    "style": "ou-tma",
     "output": "./output",
     "basename": "TMA"
 }
@@ -722,7 +722,7 @@ class LaTeXFileGenerator:
     
     def copy_style_files(self, output_folder: str) -> List[str]:
         """
-        Copy all .sty files from the current directory to the output folder.
+        Copy the ou-tma.sty file from the current directory to the output folder.
         
         Args:
             output_folder: Destination directory for style files
@@ -739,9 +739,8 @@ class LaTeXFileGenerator:
         
         try:
             # Find all .sty files in current directory
-            sty_files = list(current_dir.glob("*.sty"))
-            
-            for sty_file in sty_files:
+            sty_file = current_dir / "ou-tma.sty"
+            if sty_file.exists():
                 dest_file = output_path / sty_file.name
                 shutil.copy2(sty_file, dest_file)
                 copied_files.append(sty_file.name)
@@ -854,7 +853,7 @@ class TMAGeneratorGUI:
             ("Cut-off Date:", "cod", 15, "Assignment submission deadline (e.g., '21 January 2026', 'TBD')"),
             ("Your Name:", "name", 30, "Your full name as registered with your institution"),
             ("Student PIN:", "pin", 15, "Your student identification number (e.g., S1234567)"),
-            ("LaTeX Style:", "style", 10, "LaTeX style file to use (usually 'tma' for academic assignments)"),
+            ("LaTeX Style:", "style", 10, "LaTeX style file to use (usually 'ou-tma' for academic assignments)"),
         ]
         
         # Create standard input fields

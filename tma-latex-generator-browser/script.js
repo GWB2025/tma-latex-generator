@@ -21,7 +21,7 @@ const CONFIG = {
         cod: '21 January 2026',
         name: 'Alex Taylor',
         pin: 'S1234567',
-        style: 'tma',
+        style: 'ou-tma',
         basename: 'TMA'
     },
     STORAGE_KEYS: {
@@ -666,15 +666,12 @@ const LaTeXGenerator = {
 
         // Add style files
         try {
-            const tmaStyle = await fetch('./tma.sty').then(r => r.text());
-            const tmaExtrasStyle = await fetch('./tma-extras.sty').then(r => r.text());
-            files.set('tma.sty', tmaStyle);
-            files.set('tma-extras.sty', tmaExtrasStyle);
+            const ouTmaStyle = await fetch('./ou-tma.sty').then(r => r.text());
+            files.set('ou-tma.sty', ouTmaStyle);
         } catch (error) {
             console.warn('Could not load style files:', error);
             // Fallback: Generate basic style file content
-            files.set('tma.sty', this.generateFallbackStyle());
-            files.set('tma-extras.sty', '% TMA Extras style file\n\\endinput');
+            files.set('ou-tma.sty', this.generateFallbackStyle());
         }
 
         return files;
@@ -1094,7 +1091,7 @@ const UI = {
                     <li><strong>Cut-off Date:</strong> Submission deadline (e.g., "21 January 2026")</li>
                     <li><strong>Your Name:</strong> Your full name as registered</li>
                     <li><strong>Student PIN:</strong> Your student identification number</li>
-                    <li><strong>LaTeX Style:</strong> Style file to use (usually "tma")</li>
+                    <li><strong>LaTeX Style:</strong> Style file to use (usually "ou-tma")</li>
                     <li><strong>Base Filename:</strong> Main file name (usually "TMA")</li>
                 </ul>
 
@@ -1147,7 +1144,7 @@ const UI = {
                     <li>Question files (q1.tex, q2.tex, etc.)</li>
                     <li>Part files (q1a.tex, q1b.tex, etc.)</li>
                     <li>Subpart files (q1a_0.tex, q1a_1.tex, etc.)</li>
-                    <li>Style files (tma.sty, tma-extras.sty)</li>
+                    <li>Style file (ou-tma.sty)</li>
                 </ul>
 
                 <h4>5. Keyboard Shortcuts</h4>

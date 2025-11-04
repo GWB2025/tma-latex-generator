@@ -145,7 +145,7 @@ The application creates a complete file structure ready for Overleaf:
 - **q1.tex, q2.tex, ...**: Individual question files
 - **q1a.tex, q1b.tex, ...**: Question part files
 - **q1a_0.tex, q1a_1.tex, ...**: Subpart files (when applicable)
-- **tma.sty, tma-extras.sty**: LaTeX style files (automatically copied)
+- **ou-tma.sty**: LaTeX style file (automatically copied)
 
 ## 🌍 Using with Overleaf
 
@@ -210,7 +210,7 @@ cd /path/to/your/output/directory
 
 # Verify all files are present
 ls -la
-# Should show: TMA.tex, q1.tex, q2.tex, ..., tma.sty, tma-extras.sty
+# Should show: TMA.tex, q1.tex, q2.tex, ..., ou-tma.sty
 ```
 
 ### Step 3: Compile with TeX Live
@@ -260,8 +260,7 @@ lualatex TMA.tex
    ├── q1b.tex           ← Question 1, part (b) - EDIT THIS
    ├── q2.tex            ← Question 2 master file
    ├── q2a.tex           ← Question 2, part (a) - EDIT THIS
-   ├── tma.sty           ← Style file (don't edit)
-   └── tma-extras.sty    ← Additional styles (don't edit)
+   ├── ou-tma.sty           ← Style file (don't edit)
    ```
 
 3. **Editing Workflow:**
@@ -273,12 +272,12 @@ lualatex TMA.tex
 
 #### Common Issues:
 
-**Error: "File `tma.sty' not found"**
+**Error: "File `ou-tma.sty' not found"**
 ```bash
-# Ensure .sty files are in the same directory as TMA.tex
-# Or install them in your local texmf tree:
+# Ensure .sty file is in the same directory as TMA.tex
+# Or install it in your local texmf tree:
 mkdir -p ~/texmf/tex/latex/local
-cp tma.sty tma-extras.sty ~/texmf/tex/latex/local/
+cp ou-tma.sty ~/texmf/tex/latex/local/
 texhash ~/texmf
 ```
 
@@ -393,8 +392,7 @@ tma-latex-generator-browser/
 │   ├── LaTeXGenerator    # File generation engine
 │   └── UI                # User interface management
 ├── styles.css            # Complete responsive styling (750+ lines)
-├── tma.sty               # LaTeX main style file
-└── tma-extras.sty        # Extended LaTeX commands
+├── ou-tma.sty        # LaTeX main style file
 ```
 
 ## 🤝 Contributing
@@ -428,6 +426,7 @@ This project is licensed under the MIT Licence - see the [LICENCE](LICENCE) file
 
 ## 🙏 Acknowledgments
 
+- **Geoff Riley**: For his feedback and the original `ou-tma.sty` package, which is now used in this project.
 - **Academic Community**: For providing the educational context and LaTeX style requirements
 - **Python Community**: For the excellent tkinter framework and development tools
 - **Contributors**: Thanks to all who have contributed to making this tool better
@@ -463,7 +462,7 @@ This tool is specifically designed for students working on Tutor-Marked Assignme
 **For TeX Live users:**
 - TeX Live installation ([Download here](https://tug.org/texlive/))
 - LaTeX editor (TeXstudio, TeXworks, VS Code with LaTeX Workshop, etc.)
-- Academic LaTeX style files (`tma.sty`, `tma-extras.sty`) - automatically included
+- Academic LaTeX style files (`ou-tma.sty`) - automatically included
 - Basic LaTeX knowledge for content creation
 
 ### 🌟 **Quick Links Summary**
