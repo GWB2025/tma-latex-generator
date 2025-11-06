@@ -44,11 +44,13 @@ DEFAULT_CONFIG = {
     "course": "MATH101",
     "tma_ref": "04", 
     "cod": "21 January 2026",
-    "name": "Alex Taylor",
+    "title": "",
+    "name": "Alex Noel Other",
     "pin": "S1234567",
     "style": "ou-tma",
     "output": "./output",
-    "basename": "TMA"
+    "basename": "TMA",
+    "part_numbering_style": "alph"
 }
 
 # GUI styling constants
@@ -239,12 +241,12 @@ The TMA LaTeX Generator creates structured LaTeX files for academic assignments,
 📋 STEP-BY-STEP GUIDE
 
 1. BASIC SETTINGS
-   • Course Code: Your module code (e.g., MATH101, PHYS201, etc.)
+   • Course Code: Your module code (e.g., M101, PHYS201, etc.)
    • TMA Reference: Assignment number (e.g., 01, 02, 03, 04)
    • Cut-off Date: Submission deadline (e.g., "21 January 2026")
-   • Your Name: Your full name as registered
+   • Your Name: Your full name as registered (e.g., Alex Noel Other)
    • Student PIN: Your student identification number
-   • LaTeX Style: Style file to use (usually "tma")
+   • LaTeX Style: The LaTeX style file to use. This is set to 'ou-tma' and cannot be changed.
    • Output Directory: Where to save generated files
    • Base Filename: Main file name (usually "TMA")
 
@@ -271,89 +273,23 @@ The TMA LaTeX Generator creates structured LaTeX files for academic assignments,
    • "b:1,2,3" - part (b) has numbered subparts (1), (2), (3)
    • Leave blank if no subparts needed
 
-3. COMPLETE EXAMPLES
+3. PACKAGE OPTIONS
+   • roman: Use Roman numerals for part numbering (i, ii, iii). If not selected, alphabetic numbering (a, b, c) is used.
+   • cleveref: Enable cleveref for smart cross-referencing.
+   • pdfbookmark: Add PDF bookmarks for questions.
+   • legacy: Enable legacy command definitions (e.g., \vec).
 
-   📚 EXAMPLE 1: Simple Question
-   Question 1:
-   • Marks: 25
-   • Parts: a,b,c,d
-   • Subparts: (leave blank)
-   
-   This creates: Q1 with parts (a), (b), (c), (d), no subparts
-
-   📚 EXAMPLE 2: Complex Question
-   Question 1:
-   • Marks: 30
-   • Parts: a,b,c
-   • Subparts: a:i,ii,iii;c:i,ii
-   
-   This creates:
-   • Q1(a) with subparts (i), (ii), (iii)
-   • Q1(b) with no subparts
-   • Q1(c) with subparts (i), (ii)
-
-   📚 EXAMPLE 3: Mixed Numbering
-   Question 2:
-   • Marks: 20
-   • Parts: a,b
-   • Subparts: a:1,2,3,4;b:i,ii
-   
-   This creates:
-   • Q2(a) with subparts (1), (2), (3), (4)
-   • Q2(b) with subparts (i), (ii)
-
-4. COMMON TMA PATTERNS
-
-   🏫 TYPICAL ACADEMIC TMA STRUCTURE:
-   • 4 questions, 25 marks each
-   • Each question has 4 parts (a,b,c,d)
-   • Some parts may have subparts
-
-   📖 EXAMPLE TMA SETUP:
-   
-   Question 1: Marks=25, Parts=a,b,c,d, Subparts=a:i,ii;c:i,ii,iii
-   Question 2: Marks=25, Parts=a,b,c,d, Subparts=b:i,ii,iii
-   Question 3: Marks=25, Parts=a,b,c,d, Subparts=(blank)
-   Question 4: Marks=25, Parts=a,b,c,d, Subparts=d:i,ii
-
-5. GENERATED FILES
-
-   The application creates:
-   • Main LaTeX file (TMA.tex)
-   • Question files (q1.tex, q2.tex, etc.)
-   • Part files (q1a.tex, q1b.tex, etc.)
-   • Subpart files (q1a_0.tex, q1a_1.tex, etc.)
-
-6. CONTROLS
+4. CONTROLS
 
    🔧 BUTTONS:
    • Add Question: Creates a new question entry
-   • Clear All: Removes all questions (use carefully!)
+   • Clear All: Resets all fields and questions to their default values.
+   • Example: Populates the form with example questions.
    • Generate TMA Files: Creates the LaTeX file structure
    • Save Settings: Saves your configuration for next time
    • Help: Shows this help dialog
 
-   ⚠️ TIPS:
-   • Start with one question to test your setup
-   • Save settings frequently to avoid re-entering information
-   • Check the output directory exists before generating
-   • Review the generated structure in the output log
-
-7. TROUBLESHOOTING
-
-   ❌ Common Issues:
-   • "No questions specified": Add at least one question
-   • "Invalid marks": Enter numbers only in marks field
-   • "Directory error": Check output directory path is valid
-   • "Generation failed": Check all fields are properly filled
-
-   ✅ Best Practices:
-   • Use consistent naming (lowercase for parts: a,b,c)
-   • Check subpart syntax carefully (part:sub1,sub2)
-   • Test with simple structure first
-   • Keep backup of your LaTeX style files
-
-📞 USING WITH OVERLEAF
+5. USING WITH OVERLEAF
 
 This tool generates files specifically for Overleaf:
 
@@ -361,7 +297,7 @@ This tool generates files specifically for Overleaf:
    • Go to overleaf.com and sign in
    • Click "New Project" → "Blank Project"
    • Use the suggested project name from output
-   • (e.g., "MATH101 TMA 04 (2026)")
+   • (e.g., "M101 TMA 04 (2026)")
 
 2. UPLOAD GENERATED FILES:
    • Delete the default main.tex file in Overleaf
@@ -534,12 +470,30 @@ class LaTeXFileGenerator:
         if MAIN_TEX_PROGRAM:
             lines.append(MAIN_TEX_PROGRAM)
         lines.append("\\documentclass[a4paper,12pt]{article}")
-        lines.append(f"\\usepackage{{{self.config['style']}}}")
+
+        options = []
+        if self.config.get("roman"):
+            options.append("roman")
+        else:
+            options.append("alph")
+        if self.config.get("cleveref"):
+            options.append("cleveref")
+        if self.config.get("pdfbookmark"):
+            options.append("pdfbookmark")
+        if self.config.get("legacy"):
+            options.append("legacy")
+
+        if options:
+            style_package_line = f"\\usepackage[{','.join(options)}]{{{self.config['style']}}}"
+        else:
+            style_package_line = f"\\usepackage{{{self.config['style']}}}"
+
+        lines.append(style_package_line)
         lines.append(f"\\myname{{{self.config['name']}}}")
         lines.append(f"\\mypin{{{self.config['pin']}}}")
         lines.append(f"\\mycourse{{{self.config['course']}}}")
         lines.append(f"\\mytma{{{self.config['tma_ref']}}}")
-        lines.append(f"\\mycod{{{self.config['cod']}}}")
+        lines.append(f"\\setdate{{{self.config['cod']}}}")
         lines.append("")
         
         # Generate includeonly directive
@@ -637,8 +591,7 @@ class LaTeXFileGenerator:
         lines.append("\\begin{question}")
         
         for part in parts:
-            part_letter = chr(97 + ord(part) - ord('a'))  # Ensure lowercase
-            lines.append(f"\\qpart %({part_letter})")
+            lines.append(f"\\qpart %({part})")
             lines.append(f"\\input{{{QUESTION_PREFIX}{question_number}{part}}}")
         
         lines.append("\\end{question}")
@@ -768,7 +721,7 @@ class TMAGeneratorGUI:
         """
         self.root = root
         self.config = ConfigManager.load_config()
-        self.question_widgets: List[Dict[str, Union[ttk.Frame, tk.StringVar]]] = []
+        self.questions: List[Dict[str, tk.StringVar]] = []
         
         self._setup_main_window()
         self._create_widgets()
@@ -848,19 +801,45 @@ class TMAGeneratorGUI:
         """
         # Setting field definitions with labels, config keys, widths and tooltips
         settings_fields = [
-            ("Course Code:", "course", 15, "Your module code (e.g., MATH101, PHYS201, CHEM301)"),
-            ("TMA Reference:", "tma_ref", 10, "TMA assignment number (e.g., 01, 02, 03, 04)"),
-            ("Cut-off Date:", "cod", 15, "Assignment submission deadline (e.g., '21 January 2026', 'TBD')"),
-            ("Your Name:", "name", 30, "Your full name as registered with your institution"),
-            ("Student PIN:", "pin", 15, "Your student identification number (e.g., S1234567)"),
-            ("LaTeX Style:", "style", 10, "LaTeX style file to use (usually 'ou-tma' for academic assignments)"),
+            ("Course Code:", "course", 15, "Your module code (e.g., MATH101, PHYS201, CHEM301)", True),
+            ("TMA Reference:", "tma_ref", 10, "TMA assignment number (e.g., 01, 02, 03, 04)", True),
+            ("Date:", "cod", 20, "This is a free format field, any rendition of 'data' may be given e.g. '21 October 2025'. You may retrieve this date later using the '\\thedate' command.", True),
+            ("Title:", "title", 30, "Optional title for the TMA, which will appear on the title page", True),
+            ("Your Name:", "name", 30, "Your full name as registered with your institution", True),
+            ("Student PIN:", "pin", 15, "Your student identification number (e.g., S1234567)", True),
+            ("LaTeX Style:", "style", 10, "Obtained from:https://ctan.org/pkg/ou-tma", False),
         ]
         
         # Create standard input fields
-        for label_text, config_key, width, tooltip_text in settings_fields:
+        for label_text, config_key, width, tooltip_text, editable in settings_fields:
             row = self._create_labeled_entry(
-                parent, row, label_text, config_key, width, tooltip_text
+                parent, row, label_text, config_key, width, tooltip_text, editable
             )
+
+        # Add options checkboxes
+        options_frame = ttk.LabelFrame(parent, text="Package Options")
+        options_frame.grid(row=row, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=5)
+        row += 1
+
+        self.roman_var = tk.BooleanVar(value=self.config.get("roman", False))
+        self.cleveref_var = tk.BooleanVar(value=self.config.get("cleveref", False))
+        self.pdfbookmark_var = tk.BooleanVar(value=self.config.get("pdfbookmark", False))
+        self.legacy_var = tk.BooleanVar(value=self.config.get("legacy", False))
+
+        options = [
+            ("roman", self.roman_var, "Use Roman numerals for part numbering (i, ii, iii)"),
+            ("cleveref", self.cleveref_var, "Enable cleveref for smart cross-referencing"),
+            ("pdfbookmark", self.pdfbookmark_var, "Add PDF bookmarks for questions"),
+            ("legacy", self.legacy_var, "Enable legacy command definitions (e.g., \\vec)")
+        ]
+
+        for i, (text, var, tooltip) in enumerate(options):
+            cb = ttk.Checkbutton(options_frame, text=text, variable=var)
+            cb.grid(row=0, column=i, sticky=tk.W, padx=5, pady=2)
+            ToolTip(cb, tooltip)
+
+        
+
         
         # Special handling for output directory (has browse button)
         row = self._create_output_directory_field(parent, row)
@@ -873,6 +852,8 @@ class TMAGeneratorGUI:
         
         return row
     
+
+    
     def _create_labeled_entry(
         self,
         parent: ttk.Frame,
@@ -880,7 +861,8 @@ class TMAGeneratorGUI:
         label_text: str,
         config_key: str,
         width: int,
-        tooltip_text: str
+        tooltip_text: str,
+        editable: bool = True
     ) -> int:
         """
         Create a labeled entry field with tooltip.
@@ -904,6 +886,8 @@ class TMAGeneratorGUI:
         # Create entry field
         var = tk.StringVar(value=self.config[config_key])
         entry = ttk.Entry(parent, textvariable=var, width=width)
+        if not editable:
+            entry.config(state='readonly')
         entry.grid(
             row=row, column=1, sticky=tk.W,
             pady=ENTRY_PADY, padx=(5, 0)
@@ -1001,8 +985,9 @@ class TMAGeneratorGUI:
         
         # Button definitions: (text, command, tooltip)
         buttons = [
-            ("Clear All", self._clear_structure, "Remove all questions from the structure (cannot be undone!)"),
+            ("Clear All", self._clear_structure, "Resets all fields and questions to their default values."),
             ("Add Question", self._add_question, "Add a new question to the structure"),
+            ("Example", self._add_example_questions, "Populate with example questions that demonstrate the functionality"),
             ("Help", self._show_help, "Show comprehensive help with examples and instructions"),
         ]
         
@@ -1119,8 +1104,9 @@ class TMAGeneratorGUI:
         )
         self.output_text.grid(
             row=row, column=0, columnspan=3,
-            sticky=(tk.W, tk.E, tk.N, tk.S), pady=(5, 0)
+            sticky=(tk.W, tk.E, tk.N, tk.S), pady=(5, 10)
         )
+        parent.rowconfigure(row, weight=1)
     
     def _browse_output(self) -> None:
         """Open directory browser for output directory selection."""
@@ -1131,6 +1117,47 @@ class TMAGeneratorGUI:
     def _show_help(self) -> None:
         """Display help dialog."""
         HelpDialog(self.root)
+
+    def _add_example_questions(self) -> None:
+        """Populate the GUI with a set of example questions based on the 'roman' checkbox state."""
+        if self.questions:
+            if not messagebox.askyesno(
+                "Add Example Questions",
+                "This will clear all current questions. Are you sure?"
+            ):
+                return
+        
+        self.questions = []
+
+        use_roman = self.roman_var.get()
+
+        if use_roman:
+            self.course_var.set('M381')
+            # Example questions with Roman numeral parts and alphabetic subparts
+            example_questions = [
+                {'marks': '25', 'parts': 'i,ii', 'subparts': 'i:a,b;ii:a,b,c'},
+                {'marks': '25', 'parts': 'i,ii,iii', 'subparts': 'i:a,b'},
+                {'marks': '30', 'parts': 'i,ii,iii,iv', 'subparts': 'iv:a,b,c,d'},
+                {'marks': '20', 'parts': 'i', 'subparts': ''}
+            ]
+        else:
+            # Example questions with alphabetic parts and Roman numeral subparts (default)
+            example_questions = [
+                {'marks': '25', 'parts': 'a,b', 'subparts': 'a:i,ii;b:i,ii,iii'},
+                {'marks': '25', 'parts': 'a,b,c', 'subparts': 'a:i,ii'},
+                {'marks': '30', 'parts': 'a,b,c,d', 'subparts': 'd:i,ii,iii,iv'},
+                {'marks': '20', 'parts': 'a', 'subparts': ''}
+            ]
+
+        for q_data in example_questions:
+            new_question = {
+                'marks_var': tk.StringVar(value=q_data['marks']),
+                'parts_var': tk.StringVar(value=q_data['parts']),
+                'subparts_var': tk.StringVar(value=q_data['subparts']),
+            }
+            self.questions.append(new_question)
+
+        self._refresh_question_frames()
     
     def _save_settings(self) -> None:
         """Save current settings to configuration file."""
@@ -1157,123 +1184,139 @@ class TMAGeneratorGUI:
             "pin": self.pin_var.get(),
             "style": self.style_var.get(),
             "output": self.output_var.get(),
-            "basename": self.basename_var.get()
+            "basename": self.basename_var.get(),
+            "roman": self.roman_var.get(),
+            "cleveref": self.cleveref_var.get(),
+            "pdfbookmark": self.pdfbookmark_var.get(),
+            "legacy": self.legacy_var.get()
         }
     
     def _add_question(self) -> None:
-        """Add a new question input widget to the structure."""
-        question_num = len(self.question_widgets) + 1
-        question_frame = ttk.LabelFrame(
-            self.structure_scrollable_frame,
-            text=f"Question {question_num}"
-        )
-        question_frame.pack(fill=tk.X, padx=5, pady=2)
+        """Add a new question to the end of the list."""
+        self._insert_question(len(self.questions))
+
+    def _insert_question(self, index: int) -> None:
+        """Inserts a new blank question at the given index."""
+        new_question = {
+            'marks_var': tk.StringVar(value='25'),
+            'parts_var': tk.StringVar(value='a,b,c,d'),
+            'subparts_var': tk.StringVar(value=''),
+        }
+        self.questions.insert(index, new_question)
+        self._refresh_question_frames()
+
+    def _remove_question(self, index: int) -> None:
+        """Remove a question from the structure."""
+        question_text = f"Question {index + 1}"
         
-        # Details frame for question inputs
-        details_frame = ttk.Frame(question_frame)
-        details_frame.pack(fill=tk.X, padx=5, pady=2)
-        
-        # Create question input fields
-        question_data = self._create_question_input_fields(
-            details_frame, question_frame
-        )
-        question_data['frame'] = question_frame
-        
-        self.question_widgets.append(question_data)
-        self._update_scroll_region()
-    
-    def _create_question_input_fields(
-        self,
-        parent: ttk.Frame,
-        question_frame: ttk.LabelFrame
-    ) -> Dict[str, Union[tk.StringVar, ttk.Button]]:
-        """
-        Create input fields for a single question.
-        
-        Args:
-            parent: Parent frame for inputs
-            question_frame: Frame containing the question (for removal)
-            
-        Returns:
-            Dictionary containing references to created widgets
-        """
-        # Field definitions: (label, default_value, width, tooltip)
-        field_defs = [
-            ("Marks:", "25", 5, "Total marks for this question (e.g., 25, 30, 15)"),
-            ("Parts:", "a,b,c,d", 20, "Question parts separated by commas\nExamples: 'a,b,c,d' or 'a,b' or 'a,b,c,d,e,f'"),
-            ("Subparts (part:subparts):", "", 15, "Subparts for each part using format: part:sub1,sub2\nExamples:\n'a:i,ii,iii' or 'a:i,ii;c:1,2,3'\nLeave blank if no subparts"),
-        ]
-        
-        question_data = {}
-        
-        for label_text, default_val, width, tooltip in field_defs:
-            # Create label
-            ttk.Label(parent, text=label_text).pack(side=tk.LEFT)
-            
-            # Create entry with variable
-            var = tk.StringVar(value=default_val)
-            entry = ttk.Entry(parent, textvariable=var, width=width)
-            entry.pack(side=tk.LEFT, padx=(2, 10))
-            ToolTip(entry, tooltip)
-            
-            # Store variable reference
-            field_key = label_text.split(':')[0].lower().replace(' ', '_')
-            if field_key == "subparts_(part":
-                field_key = "subparts"
-            question_data[f"{field_key}_var"] = var
-        
-        # Remove button
-        remove_button = ttk.Button(
-            parent,
-            text="Remove",
-            command=lambda: self._remove_question(question_frame)
-        )
-        remove_button.pack(side=tk.RIGHT)
-        ToolTip(remove_button, "Remove this question from the structure")
-        
-        return question_data
-    
-    def _remove_question(self, question_frame: ttk.LabelFrame) -> None:
-        """
-        Remove a question from the structure.
-        
-        Args:
-            question_frame: Frame to remove
-        """
-        # Get question number for confirmation message
-        question_text = question_frame.cget('text')
-        
-        # Confirm removal
         if not messagebox.askyesno(
             "Remove Question",
             f"Remove {question_text}? This cannot be undone."
         ):
             return
         
-        # Remove from widgets list
-        self.question_widgets = [
-            q for q in self.question_widgets
-            if q['frame'] != question_frame
-        ]
-        question_frame.destroy()
+        del self.questions[index]
         
-        # Renumber remaining questions
-        for i, question_data in enumerate(self.question_widgets):
-            question_data['frame'].configure(text=f"Question {i + 1}")
-        
+        if not self.questions:
+            # If all questions are removed, add a fresh one back
+            self._add_question()
+        else:
+            self._refresh_question_frames()
+
+    def _refresh_question_frames(self) -> None:
+        """Destroy and recreate all question frames from the self.questions list."""
+        # Destroy all existing widgets in the scrollable frame
+        for widget in self.structure_scrollable_frame.winfo_children():
+            widget.destroy()
+
+        # Re-create all question frames from the data model
+        for i, question_data in enumerate(self.questions):
+            question_num = i + 1
+            
+            question_frame = ttk.LabelFrame(
+                self.structure_scrollable_frame,
+                text=f"Question {question_num}"
+            )
+            question_frame.pack(fill=tk.X, padx=5, pady=2)
+            
+            details_frame = ttk.Frame(question_frame)
+            details_frame.pack(fill=tk.X, padx=5, pady=2)
+            
+            self._create_question_input_fields(details_frame, i, question_data)
+
         self._update_scroll_region()
+
+    def _create_question_input_fields(
+        self,
+        parent: ttk.Frame,
+        index: int,
+        question_data: Dict[str, tk.StringVar]
+    ) -> None:
+        """
+        Create input fields and buttons for a single question.
+        
+        Args:
+            parent: The parent frame for the widgets.
+            index: The index of the question in the self.questions list.
+            question_data: The data dictionary for the question.
+        """
+        field_defs = [
+            ("Marks:", question_data['marks_var'], 5, "Total marks for this question (e.g., 25, 30, 15)"),
+            ("Parts:", question_data['parts_var'], 20, "Question parts separated by commas\nExamples: 'a,b,c,d' or 'a,b' or 'a,b,c,d,e,f'"),
+            ("Subparts (part:subparts):", question_data['subparts_var'], 15, "Subparts for each part using format: part:sub1,sub2\nExamples:\n'a:i,ii,iii' or 'a:a,b,c'\nLeave blank if no subparts"),
+        ]
+        
+        for label_text, var, width, tooltip in field_defs:
+            ttk.Label(parent, text=label_text).pack(side=tk.LEFT)
+            entry = ttk.Entry(parent, textvariable=var, width=width)
+            entry.pack(side=tk.LEFT, padx=(2, 10))
+            ToolTip(entry, tooltip)
+        
+        # Action buttons for the question
+        button_frame = ttk.Frame(parent)
+        button_frame.pack(side=tk.RIGHT)
+
+        add_button = ttk.Button(
+            button_frame,
+            text="Add",
+            command=lambda i=index: self._insert_question(i + 1)
+        )
+        add_button.pack(side=tk.LEFT, padx=(0, 5))
+        ToolTip(add_button, "Insert a new question after this one")
+
+        remove_button = ttk.Button(
+            button_frame,
+            text="Remove",
+            command=lambda i=index: self._remove_question(i)
+        )
+        remove_button.pack(side=tk.LEFT)
+        ToolTip(remove_button, "Remove this question from the structure")
+
     
     def _clear_structure(self) -> None:
-        """Clear all questions from the structure."""
-        # Confirm destructive action
-        if messagebox.askyesno(
-            "Clear All Questions",
-            "This will remove all questions from the structure. This cannot be undone. Continue?"
-        ):
-            for question_data in self.question_widgets:
-                question_data['frame'].destroy()
-            self.question_widgets = []
-            self._update_scroll_region()
+        """Resets all input fields, checkboxes, and clears all questions to their default states."""
+        # Reset text entry fields to their defaults
+        self.course_var.set(DEFAULT_CONFIG["course"])
+        self.tma_ref_var.set(DEFAULT_CONFIG["tma_ref"])
+        self.cod_var.set(DEFAULT_CONFIG["cod"])
+        self.title_var.set(DEFAULT_CONFIG["title"])
+        self.name_var.set(DEFAULT_CONFIG["name"])
+        self.pin_var.set(DEFAULT_CONFIG["pin"])
+        self.style_var.set(DEFAULT_CONFIG["style"])
+        self.basename_var.set(DEFAULT_CONFIG["basename"])
+        self.output_var.set(DEFAULT_CONFIG["output"])
+
+        # Reset checkboxes to their default (unchecked) state
+        self.roman_var.set(False)
+        self.cleveref_var.set(False)
+        self.pdfbookmark_var.set(False)
+        self.legacy_var.set(False)
+
+        # Clear all questions and add a single new one
+        self.questions = []
+        self._add_question()
+
+        messagebox.showinfo("Clear", "All fields have been reset to their default values.")
     
     def _update_scroll_region(self) -> None:
         """Update scrollable canvas scroll region."""
@@ -1291,7 +1334,7 @@ class TMAGeneratorGUI:
         """
         structure = {}
         
-        for i, question_data in enumerate(self.question_widgets):
+        for i, question_data in enumerate(self.questions):
             q_id = f"Q{i + 1}"
             
             # Get marks (with validation)
@@ -1360,7 +1403,7 @@ class TMAGeneratorGUI:
         """
         total_marks = 0
         
-        for i, question_data in enumerate(self.question_widgets):
+        for i, question_data in enumerate(self.questions):
             question_num = i + 1
             
             # Get and validate marks
@@ -1423,7 +1466,7 @@ class TMAGeneratorGUI:
         Returns:
             Error message if user chooses to fix, None if user chooses to continue
         """
-        num_questions = len(self.question_widgets)
+        num_questions = len(self.questions)
         
         if total_marks < 100:
             message = (f"Total marks: {total_marks} (should be 100)\n\n"
@@ -1460,7 +1503,7 @@ class TMAGeneratorGUI:
         self.output_text.delete(1.0, tk.END)
         
         # Validate input
-        if not self.question_widgets:
+        if not self.questions:
             messagebox.showerror("Error", "Please add at least one question.")
             return
         
@@ -1664,6 +1707,8 @@ class TMAGeneratorGUI:
         project_name = f"{course} TMA {tma_ref}{year_suffix}"
         
         return project_name
+
+
 
 
 def main() -> None:

@@ -70,13 +70,13 @@ php -S localhost:8080  # PHP
 ### Course Information Fields
 
 | Field | Description | Example |
-|-------|-------------|---------|
-| **Course Code** | Your module identifier | `MATH101`, `PHYS201` |
+|---|---|---|
+| **Course Code** | Your module identifier | `M101`, `PHYS201` |
 | **TMA Reference** | Assignment number | `01`, `02`, `03`, `04` |
-| **Cut-off Date** | Submission deadline | `21 January 2026` |
-| **Your Name** | Full registered name | `Alex Taylor` |
+| **Date** | Submission deadline. This is a free format field, any rendition of 'data' may be given e.g. '21 October 2025'. You may retrieve this date later using the '\thedate' command. | `21 January 2026` |
+| **Your Name** | Full registered name | `Alex Noel Other` |
 | **Student PIN** | Student ID number | `S1234567` |
-| **LaTeX Style** | Style file to use | `tma` (default) |
+| **LaTeX Style** | The LaTeX style file to use. This is set to 'ou-tma' and cannot be changed. | `ou-tma` (default) |
 | **Base Filename** | Main document name | `TMA` (creates TMA.tex) |
 
 ### Question Structure
@@ -107,10 +107,33 @@ Question 3: Marks=25, Parts=a,b,c,d, Subparts=(blank)
 Question 4: Marks=20, Parts=a,b, Subparts=a:i,ii;b:i,ii,iii
 ```
 
+### Package Options
+
+| Option | Description |
+|---|---|
+| **roman** | Use Roman numerals for part numbering (i, ii, iii). If not selected, alphabetic numbering (a, b, c) is used. |
+| **cleveref** | Enable cleveref for smart cross-referencing. |
+| **pdfbookmark** | Add PDF bookmarks for questions. |
+| **legacy** | Enable legacy command definitions (e.g., \vec). |
+
+### Buttons
+
+| Button | Description |
+|---|---|
+| **Add Question** | Creates a new question entry. |
+| **Clear All** | Resets all fields and questions to their default values. |
+| **Example** | Populates the form with example questions. |
+| **Help** | Shows this help dialog. |
+| **Generate TMA Files** | Creates the LaTeX file structure and downloads it as a ZIP file. |
+| **Save Settings** | Saves your current configuration to your browser's local storage. |
+| **Load Settings** | Loads a previously saved configuration from a .json file. |
+| **Export Settings** | Exports your current configuration to a .json file. |
+| **Clear Saved Settings** | Deletes your saved settings from your browser's local storage and reloads the application with the default settings. |
+
 ## ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
-|----------|--------|
+|---|---|
 | `Ctrl+G` | Generate TMA Files |
 | `Ctrl+S` | Save Settings |
 | `Ctrl+H` | Show Help Dialog |
@@ -130,7 +153,7 @@ Question 4: Marks=20, Parts=a,b, Subparts=a:i,ii;b:i,ii,iii
 
 ### **File Generation**
 - **Complete LaTeX structure** matching desktop version
-- **Professional style files** included (tma.sty, tma-extras.sty)
+- **Professional style files** included (ou-tma.sty)
 - **ZIP packaging** with JSZip for easy download
 - **Cross-platform compatibility** (Windows, Mac, Linux)
 
@@ -152,8 +175,7 @@ Downloaded ZIP File:
 ├── q2a.tex              # Question 2 part (a) - EDIT THIS
 ├── q1a_0.tex            # Subpart files (if subparts exist)
 ├── q1a_1.tex            # 
-├── tma.sty              # Main LaTeX style file
-└── tma-extras.sty       # Extended LaTeX commands
+└── ou-tma.sty           # Main LaTeX style file
 ```
 
 ## 🌐 Overleaf Integration

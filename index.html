@@ -32,7 +32,7 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="course">Course Code</label>
-                        <input type="text" id="course" name="course" value="MATH101" 
+                        <input type="text" id="course" name="course" value="M101" 
                                data-tooltip="Your module code (e.g., MATH101, PHYS201, CHEM301)">
                     </div>
 
@@ -43,9 +43,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="cod">Cut-off Date</label>
+                        <label for="cod">Date:</label>
                         <input type="text" id="cod" name="cod" value="21 January 2026" 
-                               data-tooltip="Assignment submission deadline (e.g., '21 January 2026', 'TBD')">
+                               data-tooltip="This is a free format field, any rendition of 'data' may be given e.g. '21 October 2025'. You may retrieve this date later using the '\thedate' command.">
                     </div>
 
                     <div class="form-group">
@@ -60,11 +60,34 @@
                                data-tooltip="Your student identification number (e.g., S1234567)">
                     </div>
 
-                    <div class="form-group">
-                        <label for="style">LaTeX Style</label>
-                        <input type="text" id="style" name="style" value="tma" 
-                               data-tooltip="LaTeX style file to use (usually 'tma' for academic assignments)">
+                <div class="form-group">
+                    <label for="style">LaTeX Style:</label>
+                    <input type="text" id="style" class="form-control" value="ou-tma.sty"                               data-tooltip="Obtained from:https://ctan.org/pkg/ou-tma">
+                </div>
+
+                <div class="form-group">
+                    <label>Package Options:</label>
+                    <div class="checkbox-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="roman" data-tooltip="Use Roman numerals for part numbering (i, ii, iii)">
+                            <label class="form-check-label" for="roman">roman</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="cleveref" data-tooltip="Enable cleveref for smart cross-referencing">
+                            <label class="form-check-label" for="cleveref">cleveref</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pdfbookmark" data-tooltip="Add PDF bookmarks for questions">
+                            <label class="form-check-label" for="pdfbookmark">pdfbookmark</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="legacy" data-tooltip="Enable legacy command definitions (e.g., \vec)">
+                            <label class="form-check-label" for="legacy">legacy</label>
+                        </div>
                     </div>
+                </div>
+
+
 
                     <div class="form-group">
                         <label for="basename">Base Filename</label>
@@ -91,6 +114,9 @@
                     <button type="button" id="show-help" class="btn btn-info">
                         ❓ Help
                     </button>
+                    <button type="button" id="add-example" class="btn btn-info">
+                        🌟 Example
+                    </button>
                 </div>
 
                 <div id="questions-container" class="questions-container">
@@ -109,6 +135,12 @@
                     </button>
                     <button type="button" id="load-settings" class="btn btn-secondary">
                         📂 Load Settings
+                    </button>
+                    <button type="button" id="export-settings" class="btn btn-secondary">
+                        📤 Export Settings
+                    </button>
+                    <button type="button" id="clear-saved-settings" class="btn btn-danger">
+                        🗑️ Clear Saved Settings
                     </button>
                 </div>
             </section>

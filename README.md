@@ -116,16 +116,19 @@ The TMA LaTeX Generator creates structured LaTeX file hierarchies for academic a
 ### Basic Configuration
 
 1. **Course Information:**
-   - **Course Code**: Your module (e.g., MATH101, PHYS201)
+   - **Course Code**: Your module (e.g., M101, PHYS201)
    - **TMA Reference**: Assignment number (01, 02, 03, 04)
-   - **Cut-off Date**: Submission deadline
-   - **Your Name**: Full name as registered with your institution
+   - **Date**: Submission deadline. This is a free format field, any rendition of 'data' may be given e.g. '21 October 2025'. You may retrieve this date later using the '\thedate' command.
+   - **Your Name**: Full name as registered with your institution (e.g., Alex Noel Other)
    - **Student PIN**: Your student identification number
 
 2. **Question Structure:**
    - **Marks**: Total marks per question (e.g., 25, 30)
    - **Parts**: Question parts separated by commas (e.g., "a,b,c,d")
    - **Subparts**: Format: `part:subparts` (e.g., "a:i,ii,iii;c:1,2,3")
+
+3. **Package Options:**
+    - **roman:** Use Roman numerals for part numbering (i, ii, iii). If not selected, alphabetic numbering (a, b, c) is used.
 
 ### Example Structure
 
@@ -352,7 +355,7 @@ sudo apt install texlive-latex-extra texlive-math-extra
 ## 📚 Documentation
 
 ### 🌐 **Browser Version Documentation**
-- **📖 [Complete Browser Documentation](tma-latex-generator-browser/README.md)**
+- **📖 [Complete Browser Documentation](README-BROWSER.md)**
 - **🌐 [Live Demo & Help](https://gwb2025.github.io/tma-latex-generator/)** - In-app help system
 - **⌨️ Keyboard Shortcuts**: Ctrl+H for help, Ctrl+G to generate, Ctrl+S to save
 
@@ -380,7 +383,7 @@ tma_generator_gui.py
 
 ### 🌐 **Browser Version (JavaScript)**
 ```
-tma-latex-generator-browser/
+/
 ├── index.html             # Main application interface
 ├── script.js              # Complete application logic (1,400+ lines)
 │   ├── CONFIG            # Application constants
@@ -435,7 +438,7 @@ This project is licensed under the MIT Licence - see the [LICENCE](LICENCE) file
 
 ### 🌐 **Browser Version**
 - **🚀 [Live Application](https://gwb2025.github.io/tma-latex-generator/)**
-- **📖 [Browser Documentation](tma-latex-generator-browser/README.md)**
+- **📖 [Browser Documentation](README-BROWSER.md)**
 - **💡 In-app Help**: Press Ctrl+H or click Help button
 
 ### 🖥️ **Desktop Version**
@@ -470,7 +473,7 @@ This tool is specifically designed for students working on Tutor-Marked Assignme
 | Resource | Browser Version | Desktop Version |
 |----------|----------------|------------------|
 | **🚀 Launch/Download** | **[Try Now](https://gwb2025.github.io/tma-latex-generator/)** | **[Download](https://github.com/GWB2025/tma-latex-generator)** |
-| **📖 Documentation** | **[Browser README](tma-latex-generator-browser/README.md)** | **This README** |
+| **📖 Documentation** | **[Browser README](README-BROWSER.md)** | **This README** |
 | **💡 Help System** | In-app (Ctrl+H) | In-app (Help button) |
 | **🎯 Best For** | Quick access, mobile, any device | Desktop users, offline work |
 
