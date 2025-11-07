@@ -32,8 +32,7 @@ jobs:
           test -f index.html && echo "✅ index.html found"
           test -f styles.css && echo "✅ styles.css found" 
           test -f script.js && echo "✅ script.js found"
-          test -f tma.sty && echo "✅ tma.sty found"
-          test -f tma-extras.sty && echo "✅ tma-extras.sty found"
+          test -f ou-tma.sty && echo "✅ ou-tma.sty found"
           echo "🎯 All files present!"
       
       - name: Setup Pages

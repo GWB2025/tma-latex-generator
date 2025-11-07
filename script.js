@@ -952,6 +952,8 @@ const UI = {
             }
         });
 
+        this.elements.roman.addEventListener('change', () => this.onRomanToggle());
+
         // Auto-save functionality
         setInterval(() => {
             this.autoSave();
@@ -1025,10 +1027,11 @@ const UI = {
             return;
         }
 
+        const defaultParts = State.currentConfig.roman ? 'i,ii,iii,iv' : 'a,b,c,d';
         const question = {
             id: Utils.generateId(),
             marks: '25',
-            parts: 'a,b,c,d',
+            parts: defaultParts,
             subparts: ''
         };
 
@@ -1554,6 +1557,60 @@ const UI = {
      */
     clearOutput() {
         this.elements.outputText.textContent = '';
+    },
+
+    /**
+     * Handle toggling of the 'roman' checkbox
+     */
+    onRomanToggle() {
+        this.updateConfig(); // Sync state first
+
+        const isRoman = this.elements.roman.checked;
+        const alphMap = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'];
+        const romanMap = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii'];
+
+        // Determine conversion maps for parts and subparts
+        const partFromMap = isRoman ? alphMap : romanMap;
+        const partToMap = isRoman ? romanMap : alphMap;
+        const subpartFromMap = isRoman ? romanMap : alphMap; // Subparts are opposite
+        const subpartToMap = isRoman ? alphMap : romanMap;
+
+        State.questions.forEach(question => {
+            // --- Convert Parts ---
+            const currentParts = question.parts.split(',').map(p => p.trim()).filter(Boolean);
+            const newParts = currentParts.map(part => {
+                const index = partFromMap.indexOf(part);
+                return (index !== -1) ? partToMap[index] : part;
+            });
+            question.parts = newParts.join(',');
+
+            // --- Convert Subparts ---
+            if (question.subparts.trim()) {
+                const subpartGroups = question.subparts.split(';').map(s => s.trim()).filter(Boolean);
+                
+                const newSubpartGroups = subpartGroups.map(group => {
+                    if (!group.includes(':')) return group;
+
+                    const [partKey, subValuesStr] = group.split(':', 2);
+
+                    // Convert the key (e.g., 'a' in 'a:i,ii')
+                    const keyIndex = partFromMap.indexOf(partKey.trim());
+                    const newPartKey = (keyIndex !== -1) ? partToMap[keyIndex] : partKey.trim();
+
+                    // Convert the values (e.g., 'i,ii' in 'a:i,ii')
+                    const subValues = subValuesStr.split(',').map(s => s.trim()).filter(Boolean);
+                    const newSubValues = subValues.map(val => {
+                        const valIndex = subpartFromMap.indexOf(val);
+                        return (valIndex !== -1) ? subpartToMap[valIndex] : val;
+                    });
+
+                    return `${newPartKey}:${newSubValues.join(',')}`;
+                });
+                question.subparts = newSubpartGroups.join('; ');
+            }
+        });
+
+        this.renderQuestions();
     }
 };
 
