@@ -913,7 +913,7 @@ class TMAGeneratorGUI:
                 messagebox.showerror("Validation Error", validation_error)
                 return
             structure = self._get_manual_structure()
-            success, message = self._generate_tма_files(config, structure)
+            success, message = self._generate_tma_files(config, structure)
             if success:
                 self.config = config
                 ConfigManager.save_config(self.config)
