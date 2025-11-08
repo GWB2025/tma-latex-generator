@@ -1143,6 +1143,7 @@ const UI = {
                 State.questions[questionIndex].parts = partsInput.value;
                 State.questions[questionIndex].subparts = subpartsInput.value;
             }
+            UI.updateQuestionsDisplay();
         }, 500);
 
         marksInput.addEventListener('input', updateQuestion);

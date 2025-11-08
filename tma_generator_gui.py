@@ -431,6 +431,7 @@ class TMAGeneratorGUI:
         self.config = ConfigManager.load_config()
         self.questions: List[Dict[str, tk.StringVar]] = []
         self._setup_main_window()
+        self._setup_styles()
         self._create_widgets()
     
     def _setup_main_window(self) -> None:
@@ -438,6 +439,12 @@ class TMAGeneratorGUI:
         self.root.geometry(DEFAULT_WINDOW_SIZE)
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
+
+    def _setup_styles(self) -> None:
+        style = ttk.Style()
+        style.configure("Green.TLabel", foreground="green", font=("Arial", 10, "bold"))
+        style.configure("Red.TLabel", foreground="red", font=("Arial", 10, "bold"))
+        style.configure("Orange.TLabel", foreground="#E46B0A", font=("Arial", 10, "bold"))
     
     def _create_widgets(self) -> None:
         main_frame = ttk.Frame(self.root, padding=MAIN_FRAME_PADDING)
@@ -542,6 +549,9 @@ class TMAGeneratorGUI:
             button = ttk.Button(control_frame, text=text, command=command)
             button.pack(side=tk.LEFT, padx=BUTTON_PADX)
             ToolTip(button, tooltip)
+        
+        self.total_marks_label = ttk.Label(control_frame, text="Total Marks: 0/100")
+        self.total_marks_label.pack(side=tk.LEFT, padx=(20, 0))
         return row + 1
     
     def _create_scrollable_question_area(self, parent: ttk.Frame, row: int) -> int:
@@ -642,6 +652,24 @@ class TMAGeneratorGUI:
             "legacy": self.legacy_var.get()
         }
 
+    def _update_total_marks(self, *args) -> None:
+        total_marks = 0
+        for question_data in self.questions:
+            try:
+                marks = int(question_data['marks_var'].get())
+                total_marks += marks
+            except (ValueError, tk.TclError):
+                pass  # Ignore non-integer values during editing
+        
+        if total_marks == 100:
+            style_name = "Green.TLabel"
+        elif total_marks > 100:
+            style_name = "Red.TLabel"
+        else:
+            style_name = "Orange.TLabel"
+            
+        self.total_marks_label.config(text=f"Total Marks: {total_marks}/100", style=style_name)
+
     def _on_roman_toggle(self, *args):
         """Handle toggling of the 'roman' checkbox to convert parts and subparts."""
         is_roman = self.roman_var.get()
@@ -722,6 +750,7 @@ class TMAGeneratorGUI:
             details_frame.pack(fill=tk.X, padx=5, pady=2)
             self._create_question_input_fields(details_frame, i, question_data)
         self._update_scroll_region()
+        self._update_total_marks()
 
     def _create_question_input_fields(self, parent: ttk.Frame, index: int, question_data: Dict[str, tk.StringVar]) -> None:
         field_defs = [
@@ -734,6 +763,8 @@ class TMAGeneratorGUI:
             entry = ttk.Entry(parent, textvariable=var, width=width)
             entry.pack(side=tk.LEFT, padx=(2, 10))
             ToolTip(entry, tooltip)
+            if label_text == "Marks:":
+                var.trace_add('write', self._update_total_marks)
         button_frame = ttk.Frame(parent)
         button_frame.pack(side=tk.RIGHT)
         add_button = ttk.Button(button_frame, text="Add", command=lambda i=index: self._insert_question(i + 1))
