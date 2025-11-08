@@ -518,7 +518,7 @@ const Validation = {
         const validPartsLower = validParts.map(p => p.toLowerCase());
 
         try {
-            const subpartGroups = subpartsText.split(';');
+            const subpartGroups = subpartsText.split(';').filter(g => g.trim() !== '');
             
             subpartGroups.forEach(group => {
                 if (!group.includes(':')) {
