@@ -3,3 +3,8 @@ blog_exchange.txt
 /output.*
 tma_generator_config.json
 ou-tma.pdf
+__pycache__/
+.DS_Store
+.vscode/
+venv/
+.venv/
